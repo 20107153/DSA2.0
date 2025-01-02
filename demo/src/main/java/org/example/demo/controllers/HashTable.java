@@ -27,7 +27,7 @@ public class HashTable<K, V> {
         int index = getBucketIndex(key);
         for (Entry<K, V> entry : buckets[index]) {
             if (entry.getKey().equals(key)) {
-                entry.getValue() = value; // Update existing value
+                entry.setValue(value); // Update existing value
                 return;
             }
         }
@@ -50,7 +50,7 @@ public class HashTable<K, V> {
 
     public void remove(K key) {
         int index = getBucketIndex(key);
-        buckets[index].removeIf(entry -> entry.key.equals(key));
+        buckets[index].deleteNode(entry -> entry.key.equals(key));
     }
 
     private void resize() {

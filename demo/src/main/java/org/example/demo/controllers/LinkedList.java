@@ -14,7 +14,7 @@ public class LinkedList<T>{
      * Input any class object, and it will attatch it to a node to be placed in the linked list
      * @param item
      */
-    public void addObject(T item){
+    public void add(T item){
         Node<T> nodeItem = new Node<>(indexCounter, item);
         indexCounter++;
         if (head==null){
