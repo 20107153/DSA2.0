@@ -3,7 +3,7 @@ package org.example.demo.models;
 public class Entry<K, V> {
     public K key;
     public V value;
-    Entry(K key, V value){
+    public Entry(K key, V value){
         this.key = key;
         this.value = value;
     }

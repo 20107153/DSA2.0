@@ -31,7 +31,7 @@ public class HashTable<K, V> {
                 return;
             }
         }
-        buckets[index].addObject(new Entry<>(key, value)); // Add new entry
+        buckets[index].add(new Entry<>(key, value)); // Add new entry
         size++;
         if ((double) size / buckets.length > loadFactor) {
             resize();
