@@ -26,14 +26,14 @@ public class HashTable<K, V> {
     public void put(K key, V value) {
         int index = getBucketIndex(key);
         for (Entry<K, V> entry : buckets[index]) {
-            if (entry.key.equals(key)) {
-                entry.value = value; // Update existing value
+            if (entry.getKey().equals(key)) {
+                entry.getValue() = value; // Update existing value
                 return;
             }
         }
-        buckets[index].add(new Entry<>(key, value)); // Add new entry
+        buckets[index].addObject(new Entry<>(key, value)); // Add new entry
         size++;
-        if ((double) size / buckets.length > LOAD_FACTOR) {
+        if ((double) size / buckets.length > loadFactor) {
             resize();
         }
     }
@@ -41,8 +41,8 @@ public class HashTable<K, V> {
     public V get(K key) {
         int index = getBucketIndex(key);
         for (Entry<K, V> entry : buckets[index]) {
-            if (entry.key.equals(key)) {
-                return entry.value;
+            if (entry.getKey().equals(key)) {
+                return entry.getValue();
             }
         }
         return null; // Key not found
