@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.demo.controllers.MyHashMap;
 
 import java.io.IOException;
 
@@ -17,5 +18,5 @@ public class Driver extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {new Driver();}
+    public static void main(String[] args) {launch();}
 }
