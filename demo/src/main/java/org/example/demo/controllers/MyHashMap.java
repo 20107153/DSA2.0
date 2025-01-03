@@ -152,29 +152,27 @@ public class MyHashMap<K,V> {
 
     /**
      * Searches the hashmap for all entries with a key that contains the given name.
-     *
-     * @param name The name (or substring) to search for.
-     * @return The head of a linked list containing the matching entries.
      */
     public Entry<K, V> searchByName(String name) {
         Entry<K, V> resultHead = null; // Head of the result linked list
-        Entry<K, V> currentResult = null; // Pointer to the current entry in the result linked list
+        Entry<K, V> currentResult = null; // Point to the current entry in the result linked list
 
         // Iterate through all buckets
         for (int i = 0; i < SIZE; i++) {
             Entry<K, V> currentEntry = table[i];
 
-            // Traverse the linked list in the bucket
+            //Go through linked list at table[i]
             while (currentEntry != null) {
-                // Check if the key is a String and contains the search name
+                // Check if key is a String and contains the search name
                 if (currentEntry.getKey() instanceof String) {
+                    //Check if the key string contains the search name
                     String keyString = (String) currentEntry.getKey();
                     if (keyString.contains(name)) {
                         // Create a new entry for the result linked list
                         Entry<K, V> newResult = new Entry<>(currentEntry.getKey(), currentEntry.getValue());
-
+                        //If this is the first matching rsult, make it the head
                         if (resultHead == null) {
-                            resultHead = newResult; // Initialize the result list
+                            resultHead = newResult;
                         } else {
                             currentResult.setNext(newResult); // Append to the result list
                         }
@@ -188,6 +186,10 @@ public class MyHashMap<K,V> {
 
         return resultHead; // Return the head of the result linked list
     }
+
+
+
+
 
 
     //I have no clue is string builder is allowed but this code was the only thing that would work

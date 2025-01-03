@@ -3,12 +3,12 @@ package org.example.demo.models;
 public class Ingredient<T> {
 
     String name;
-    String textual_description;
+    String textualDescription;
     float ABV;
 
     public Ingredient(String name, String textual_description, float ABV) {
         this.name = name;
-        this.textual_description = textual_description;
+        this.textualDescription = textual_description;
         this.ABV = ABV;
     }
 
@@ -20,12 +20,12 @@ public class Ingredient<T> {
         this.name = name;
     }
 
-    public String getTextual_description() {
-        return textual_description;
+    public String getTextualDescription() {
+        return textualDescription;
     }
 
-    public void setTextual_description(String textual_description) {
-        this.textual_description = textual_description;
+    public void setTextualDescription(String textualDescription) {
+        this.textualDescription = textualDescription;
     }
 
     public float getABV() {
@@ -40,7 +40,7 @@ public class Ingredient<T> {
     public String toString() {
         return "Ingredient{" +
                 "name='" + name + '\'' +
-                ", textual_description='" + textual_description + '\'' +
+                ", textual_description='" + textualDescription + '\'' +
                 ", ABV=" + ABV +
                 '}';
     }
