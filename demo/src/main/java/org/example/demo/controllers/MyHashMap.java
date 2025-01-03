@@ -150,12 +150,17 @@ public class MyHashMap<K,V> {
 
     }
 
-
+    //I have no clue is string builder is allowed but this code was the only thing that would work
     @Override
     public String toString() {
-        return "MyHashMap{" +
-                "SIZE=" + SIZE +
-                ", table=" + Arrays.toString(table) +
-                '}';
+        String st = "";
+        for (int i=0;i<SIZE;i++){
+            if (table[i]!=null){
+                st += i+") "+table[i]+"\n";
+            } else {
+                st+=i+") "+"null"+"\n";
+            }
+        }
+        return st;
     }
 }

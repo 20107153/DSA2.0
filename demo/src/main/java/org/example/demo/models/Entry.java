@@ -30,12 +30,18 @@ public class Entry<K, V> {
         return next;
     }
 
+    //Since the hashTable will only call the toString of first value,
+    // the toString of an Entry will include all that follows
+    //
+    //I have no clue is string builder is allowed but this code was the only thing that would work
     @Override
     public String toString() {
-        return "Entry{" +
-                "key=" + key +
-                ", value=" + value +
-                ", next=" + next +
-                '}';
+        Entry<K,V> temp = this;
+        StringBuilder sb = new StringBuilder();
+        while (temp != null) {
+            sb.append(temp.key + " -> " + temp.value + ",");
+            temp = temp.next;
+        }
+        return sb.toString();
     }
 }
