@@ -1,11 +1,8 @@
 package org.example.demo.controllers;
 
-import org.example.demo.models.Drink;
 import org.example.demo.models.Entry;
-import org.example.demo.models.Ingredient;
 
 import java.util.Arrays;
-import java.util.Date;
 
 public class MyHashMap<K,V> {
     private final int SIZE = 11;
@@ -190,72 +187,7 @@ public class MyHashMap<K,V> {
         return resultHead; // Return the head of the result linked list
     }
 
-    public Entry<K, V> searchDrinksByDescription(String search){
-        Entry<K, V> resultHead = null; // Head of the result linked list
-        Entry<K, V> currentResult = null; // Point to the current entry in the result linked list
 
-        //go through all buckets
-        for (int i = 0; i < SIZE; i++){
-            Entry<K, V> currentEntry = table[i];
-            //Go through linked list at table[i]
-            while (currentEntry != null) {
-
-                //check if the current entry is a Drink
-                if (currentEntry.getValue() instanceof Drink){
-                    //check if the drink description contains the search term
-                    String drinkDescription = ((Drink) currentEntry.getValue()).getTextualDescription();
-                    if (drinkDescription.contains(search)){
-                        // Create a new entry for the result linked list
-                        Entry<K, V> newResult = new Entry<>(currentEntry.getKey(), currentEntry.getValue());
-                        //If this is the first matching result, make it the head
-                        if (resultHead == null) {
-                            resultHead = newResult;
-                        } else {
-                            currentResult.setNext(newResult); // Append to the result list
-                        }
-
-                        currentResult = newResult; // Move the current pointer
-                    }
-                }
-                currentEntry=currentEntry.getNext();
-
-            }
-        }
-        return  resultHead;
-    }
-
-    public Entry<K, V> searchIngredientsByDescription(String search){
-        Entry<K, V> resultHead = null; // Head of the result linked list
-        Entry<K, V> currentResult = null; // Point to the current entry in the result linked list
-
-        //go through all buckets
-        for (int i = 0; i < SIZE; i++){
-            Entry<K, V> currentEntry = table[i];
-
-            //Go through linked list at table[i]
-            while (currentEntry != null) {
-                //check if the current entry is an ingredient
-                if (currentEntry.getValue() instanceof Ingredient){
-                    //check if the Ingredient description contains the search term
-                    String ingredientDescription = ((Ingredient) currentEntry.getValue()).getTextualDescription();
-                    if (ingredientDescription.contains(search)){
-                        // Create a new entry for the result linked list
-                        Entry<K, V> newResult = new Entry<>(currentEntry.getKey(), currentEntry.getValue());
-                        //If this is the first matching result, make it the head
-                        if (resultHead == null) {
-                            resultHead = newResult;
-                        } else {
-                            currentResult.setNext(newResult); // Append to the result list
-                        }
-
-                        currentResult = newResult; // Move the current pointer
-                    }
-                }
-                currentEntry=currentEntry.getNext();
-            }
-        }
-        return  resultHead;
-    }
 
 
 
