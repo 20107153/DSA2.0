@@ -1,8 +1,11 @@
 package org.example.demo.models;
 
 public class Entry<K, V> {
-    public K key;
-    public V value;
+    private K key;
+    private V value;
+    private Entry<K, V> next;
+
+
     public Entry(K key, V value){
         this.key = key;
         this.value = value;
@@ -18,5 +21,21 @@ public class Entry<K, V> {
 
     public void setValue(V value) {
         this.value = value;
+    }
+
+    public void setNext(Entry<K, V> next){
+        this.next=next;
+    }
+    public Entry getNext(){
+        return next;
+    }
+
+    @Override
+    public String toString() {
+        return "Entry{" +
+                "key=" + key +
+                ", value=" + value +
+                ", next=" + next +
+                '}';
     }
 }
