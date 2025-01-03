@@ -1,6 +1,6 @@
 package org.example.demo.models;
 
-public class Drink<T> {
+public class Drink {
 
     String name;
     String placeOfOrigin;

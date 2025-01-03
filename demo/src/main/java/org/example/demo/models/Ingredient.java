@@ -1,6 +1,6 @@
 package org.example.demo.models;
 
-public class Ingredient<T> {
+public class Ingredient {
 
     String name;
     String textualDescription;
