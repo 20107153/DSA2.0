@@ -153,14 +153,15 @@ public class MyHashMap<K,V> {
     //I have no clue is string builder is allowed but this code was the only thing that would work
     @Override
     public String toString() {
-        String st = "";
-        for (int i=0;i<SIZE;i++){
-            if (table[i]!=null){
-                st += i+") "+table[i]+"\n";
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < SIZE; i++) {
+            if (table[i] != null) {
+                sb.append(i + " " + table[i] + "\n");
             } else {
-                st+=i+") "+"null"+"\n";
+                sb.append(i + " " + "null" + "\n");
             }
         }
-        return st;
+
+        return sb.toString();
     }
 }
