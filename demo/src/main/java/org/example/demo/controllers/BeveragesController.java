@@ -142,7 +142,7 @@ public class BeveragesController {
     }
 
 
-    public String sortIngredientssAlphabetically(){
+    public String sortIngredientsAlphabetically(){
         Entry<String,Ingredient> listHead = ingredientsHashMap.sort();
         Entry<String,Ingredient> current = listHead;
         String resultString = "";
@@ -152,6 +152,10 @@ public class BeveragesController {
         }
         resultString += current.thisString();
         return resultString;
+    }
+
+    public Entry<String,Ingredient> getIngredient(String searchTerm){
+        return ingredientsHashMap.getEntry(searchTerm);
     }
 
 

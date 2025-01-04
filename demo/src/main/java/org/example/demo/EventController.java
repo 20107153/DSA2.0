@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.example.demo.controllers.BeveragesController;
+import org.example.demo.models.Entry;
+import org.example.demo.models.Ingredient;
 import org.example.demo.controllers.MyHashMap;
 import org.example.demo.models.Drink;
 
@@ -27,6 +29,14 @@ public class EventController {
     private TextArea resultsTextArea;
     @FXML
     private TextField searchTextField;
+    @FXML
+    private TextField recipeNameField, recipeDescriptionField, addIngredientToRecipe;
+    @FXML
+    private TextArea listRecipeIngredients;
+    @FXML
+    private TextArea recipeTextArea;
+    @FXML
+    private TextField removeRecipeField;
 
 
 
@@ -132,6 +142,66 @@ public class EventController {
         }
     }
 
+    public void sortIngredientsJfx(ActionEvent e){
+        ingredientsTextArea.setText(beverages.sortIngredientsAlphabetically());
+    }
+
+    /**
+     * RECIPIES METHODS
+     */
+    private Entry<String, Ingredient> recipeListHead = null;
+
+    public void addToRecipeList(ActionEvent e){
+        if (beverages.getIngredient(addIngredientToRecipe.getText())!=null){
+            Entry<String,Ingredient> newItem = beverages.getIngredient(addIngredientToRecipe.getText());
+            newItem.setNext(null);
+            if (recipeListHead==null){
+                recipeListHead = newItem;
+                System.out.println("adding new item as head   "+newItem);
+            } else {
+                Entry<String, Ingredient> currentEntry= recipeListHead;
+                while (currentEntry.getNext()!= null){
+                    currentEntry=currentEntry.getNext();
+                }
+                System.out.println("setting last item as new item");
+                currentEntry.setNext(newItem);
+            }
+            System.out.println(recipeListHead);
+            listRecipeIngredients.setText(recipeListHead.toString());
+        } else {
+            System.out.println("Ingredient not found");
+        }
+    }
+
+    public void clearRecipelist(ActionEvent e){
+        recipeListHead = null;
+
+        System.out.println(recipeListHead);
+    }
+
+    public void addRecipeJFX(ActionEvent e){
+        String name = recipeNameField.getText();
+        String desc = recipeDescriptionField.getText();
+        System.out.println(recipeListHead);
+        beverages.addRecipe(name,desc,recipeListHead);
+        recipeTextArea.setText(beverages.listRecipes());
+    }
+
+    public void listRecipiesJfx(ActionEvent e){
+        recipeTextArea.setText(beverages.listRecipes());
+    }
+
+
+    public void removeRecipeJfx(ActionEvent e){
+        String st = removeRecipeField.getText();
+        beverages.removeRecipe(st);
+        recipeTextArea.setText(beverages.listRecipes());
+    }
+
+
+
+
+
 
     /**
      * SEARCH METHODS
@@ -140,6 +210,11 @@ public class EventController {
     public void searchDrinksJfx(ActionEvent e){
         String searchTerm =searchTextField.getText();
         resultsTextArea.setText(beverages.searchDrinksByName(searchTerm));
+    }
+
+    public void searchIngredientsJfx(ActionEvent e){
+        String searchTerm = searchTextField.getText();
+        resultsTextArea.setText(beverages.searchIngredientssByName(searchTerm));
     }
 
 
