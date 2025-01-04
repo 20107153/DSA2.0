@@ -63,8 +63,9 @@ public class BeveragesController {
         Entry<String,Drink> listHead = drinksHashMap.searchByName(searchTerm);
         Entry<String,Drink> current = listHead;
         String resultString = "";
-        while (current!=null){
+        while (current.getNext()!=null){
             resultString+= current + "\n";
+            current=current.getNext();
         }
         resultString += current;
         return resultString;

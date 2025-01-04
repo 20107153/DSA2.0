@@ -170,6 +170,7 @@ public class MyHashMap<K,V> {
                     if (keyString.contains(name)) {
                         // Create a new entry for the result linked list
                         Entry<K, V> newResult = new Entry<>(currentEntry.getKey(), currentEntry.getValue());
+                        newResult.setNext(null);
                         //If this is the first matching rsult, make it the head
                         if (resultHead == null) {
                             resultHead = newResult;
@@ -183,7 +184,7 @@ public class MyHashMap<K,V> {
                 currentEntry = currentEntry.getNext();
             }
         }
-
+        System.out.println(resultHead);
         return resultHead; // Return the head of the result linked list
     }
 
