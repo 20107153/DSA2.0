@@ -187,10 +187,26 @@ public class MyHashMap<K,V> {
         return resultHead; // Return the head of the result linked list
     }
 
+    public void mapToArray(){
+        Entry<K, V> resultHead = null; // Head of the result linked list
+        Entry<K, V> currentResult = null; // Point to the current entry in the result linked list
+        String[] myArray = new String[0];
 
+        for (int i = 0; i < SIZE; i++) {
+         Entry<K, V> currentEntry = table[i];
 
+         while (currentEntry != null) {
+             Entry<K,V> newResult = new Entry<>(currentEntry.getKey(), currentEntry.getValue());
+             if (resultHead == null) {
+                 resultHead = newResult;
+             } else {
+                 currentResult.setNext(newResult);
+             }
 
-
+             myArray[i] = newResult.getKey().toString();
+         }
+        }
+    }
 
     //I have no clue is string builder is allowed but this code was the only thing that would work
     @Override
