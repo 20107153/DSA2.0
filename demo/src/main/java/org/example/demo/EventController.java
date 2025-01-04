@@ -35,6 +35,8 @@ public class EventController {
     public void removeDrinkJfx(ActionEvent e){
         String drinkToRemove = drinkRemoveField.getText();
         beverages.removeDrink(drinkToRemove);
+        System.out.println("Remove Drink"+ drinkToRemove);
+        drinksTextArea.setText(beverages.listDrinks());
     }
 
 

@@ -59,14 +59,14 @@ public class MyHashMap<K,V> {
                 //check if the key matches input key
                 //-> set value of existing entry to new value
                 //   as this is an UPDATE
-                if(currentEntry.getKey()==key){
+                if(currentEntry.getKey().equals(key)){
                     currentEntry.setValue(value);
                     return;
                 }
                 currentEntry=currentEntry.getNext();
             }
             //Now at last entry in list, check if it's an update one last time
-            if(currentEntry.getKey()==key){
+            if(currentEntry.getKey().equals(key)){
                 currentEntry.setValue(value);
                 return;
             }
@@ -113,15 +113,15 @@ public class MyHashMap<K,V> {
      */
     public Entry<K,V> remove(K key){
         int hash = hashKey(key) % SIZE;
-
-        //finde the existing entry at hash
+        System.out.println("removing in hashmap");
+        //find the existing entry at hash
         Entry<K,V> currentEntry = table[hash];
         //Check if it's empty, if so return null
         if (currentEntry==null){
             return null;
         }
         //check if the first entry is the one to remove
-        if (currentEntry.getKey()==key){
+        if (currentEntry.getKey().equals(key)){
             //the first entry in list is the one to remove
             // -> set the value in the table array to the next entry
             table[hash] = currentEntry.getNext();
@@ -133,12 +133,12 @@ public class MyHashMap<K,V> {
         currentEntry = currentEntry.getNext();
         //cycle through the list
         while (currentEntry!=null){
-            if(currentEntry.getKey()==key){
+            if(currentEntry.getKey().equals(key)){
                 //it has been found, set the previous next to current next ro remove it from list
                 previousEntry.setNext(currentEntry.getNext());
                 // Make sure removed object isn't pointing towards the rest of the list before removing
                 currentEntry.setNext(null);
-
+                return currentEntry;
             }
             //not this entry, set previous to current and advance current to next
             previousEntry = currentEntry;

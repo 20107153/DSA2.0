@@ -38,7 +38,7 @@
                                  <children>
                                     <Label layoutX="14.0" layoutY="14.0" minHeight="20.0" text="Enter the name of the drink to remove" />
                                     <TextField fx:id="drinkRemoveField" layoutX="14.0" layoutY="34.0" promptText="Drink to remove" />
-                                    <Button layoutX="14.0" layoutY="60.0" mnemonicParsing="false" style="-fx-background-color: pink;" text="Remove" />
+                                    <Button layoutX="14.0" layoutY="60.0" mnemonicParsing="false" onAction="#removeDrinkJfx" style="-fx-background-color: pink;" text="Remove" />
                                  </children>
                               </AnchorPane>
                         </content>

@@ -17,11 +17,8 @@ public class BeveragesController {
 
 
     public void removeDrink(String drinkName) {
-        if (drinksHashMap == null) {
-            System.out.println("There are no drinks to remove from the system");
-        } else {
             drinksHashMap.remove(drinkName);
-        }
+        System.out.println("Beverages remove"+ drinkName);
     }
 
     public String listDrinks(){
