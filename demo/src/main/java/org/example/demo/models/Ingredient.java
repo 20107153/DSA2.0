@@ -38,10 +38,8 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return "Ingredient{" +
-                "name='" + name + '\'' +
-                ", textual_description='" + textualDescription + '\'' +
-                ", ABV=" + ABV +
-                '}';
+        return //name is already called as key in entry
+                ", " + textualDescription +
+                ", ABV=" + ABV;
     }
 }

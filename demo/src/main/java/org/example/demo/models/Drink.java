@@ -48,10 +48,9 @@ public class Drink {
 
     @java.lang.Override
     public java.lang.String toString() {
-        return "Drink{" +
-                "name='" + name + '\'' +
-                ", placeOfOrigin='" + placeOfOrigin + '\'' +
-                ", textualDescription='" + textualDescription + '\'' +
+        return //name is already called
+                ", from:" + placeOfOrigin + '\'' +
+                ", " + textualDescription + '\'' +
                 ", image='" + image + '\'' +
                 '}';
     }
