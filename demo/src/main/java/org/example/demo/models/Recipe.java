@@ -1,18 +1,18 @@
 package org.example.demo.models;
 
-public class Recipe<K,V> {
+public class Recipe {
     private String name;
     private String description;
-    private Entry<K,V> headIngredient;
+    private Entry<String,Ingredient> headIngredient;
 
 
-    public Recipe(String name, String description, Entry<K,V> headIngredient){
+    public Recipe(String name, String description, Entry<String,Ingredient> headIngredient){
         this.name=name;
         this.description=description;
         this.headIngredient = headIngredient;
     }
 
-    public Entry<K, V> getHeadIngredient() {
+    public Entry<String, Ingredient> getHeadIngredient() {
         return headIngredient;
     }
 
@@ -25,7 +25,7 @@ public class Recipe<K,V> {
         //no need to add name to string the Entry<> already calls it as key
         StringBuilder str = new StringBuilder();
         str.append(description).append(", ");
-        Entry<K,V> currentIngredient = headIngredient;
+        Entry<String,Ingredient> currentIngredient = headIngredient;
         while (currentIngredient.getNext()!=null){
             str.append(currentIngredient).append(", ");
         }

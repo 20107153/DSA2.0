@@ -1,11 +1,14 @@
 package org.example.demo.controllers;
 
 import org.example.demo.models.Drink;
+import org.example.demo.models.Entry;
 import org.example.demo.models.Ingredient;
+import org.example.demo.models.Recipe;
 
 public class BeveragesController {
     MyHashMap<String, Drink> drinksHashMap = new MyHashMap<>();
     MyHashMap<String, Ingredient> ingredientsHashMap = new MyHashMap<>();
+    MyHashMap<String, Recipe> recipeHashMap = new MyHashMap<>();
 
     /**
      * DRINKS
@@ -50,5 +53,8 @@ public class BeveragesController {
      * RECIPES
      */
 
-    
+    public void addRecipe(String name, String description, Entry<String, Ingredient> headIngredient){
+        Recipe addRecipe = new Recipe(name, description, headIngredient);
+        recipeHashMap.put(addRecipe.getName(), addRecipe);
+    }
 }
