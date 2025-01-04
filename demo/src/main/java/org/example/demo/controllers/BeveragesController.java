@@ -3,10 +3,7 @@ package org.example.demo.controllers;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 import org.example.demo.models.Drink;
 import org.example.demo.models.Entry;
@@ -15,7 +12,7 @@ import org.example.demo.models.Recipe;
 
 
 public class BeveragesController {
-    MyHashMap<String, Drink> drinksHashMap = new MyHashMap<>();
+    public MyHashMap<String, Drink> drinksHashMap = new MyHashMap<>();
     MyHashMap<String, Ingredient> ingredientsHashMap = new MyHashMap<>();
     MyHashMap<String, Recipe> recipeHashMap = new MyHashMap<>();
 
@@ -35,28 +32,6 @@ public class BeveragesController {
 
     public String listDrinks(){
         return drinksHashMap.toString();
-    }
-
-    public void saveDrink() throws Exception
-    {
-        XStream xtream = new XStream(new DomDriver());
-        ObjectOutputStream out =
-                xtream.createObjectOutputStream(new FileWriter("drinks.xml"));
-        out.writeObject(drinksHashMap);
-        out.close();
-    }
-
-    public void loadDrink() throws Exception
-    {
-        Class<?>[] classes = new Class[] { Drink.class };
-
-        XStream xstream = new XStream(new DomDriver());
-        XStream.setupDefaultSecurity(xstream);
-        xstream.allowTypes(classes);
-
-        ObjectInputStream is = xstream.createObjectInputStream(new FileReader("drinks.xml"));
-        drinksHashMap = (MyHashMap<String, Drink>) is.readObject();
-        is.close();
     }
 
     public String searchDrinksByName(String searchTerm){
@@ -81,6 +56,33 @@ public class BeveragesController {
         }
         resultString += current.thisString();
         return resultString;
+    }
+
+    public void saveDrink(MyHashMap<String, Drink> drinksHashMap, String filename){
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))){
+            oos.writeObject(drinksHashMap);
+            System.out.println("Drinks saved successfully to " + filename);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public MyHashMap<String, Drink> loadDrink(String filename) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            drinksHashMap = (MyHashMap<String, Drink>) ois.readObject();
+            System.out.println("Drinks loaded successfully from " + filename);
+            return drinksHashMap;
+        } catch (ClassNotFoundException cnfe) {
+            System.err.println("Class not found exception: " + cnfe.getMessage());
+            cnfe.printStackTrace();
+        } catch (IOException ioe) {
+            System.err.println("IO exception during deserialization: " + ioe.getMessage());
+            ioe.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("An error occurred during deserialization: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

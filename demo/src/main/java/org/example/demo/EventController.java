@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.example.demo.controllers.BeveragesController;
+import org.example.demo.controllers.MyHashMap;
+import org.example.demo.models.Drink;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -50,21 +52,35 @@ public class EventController {
         drinksTextArea.setText(beverages.listDrinks());
     }
 
-    public void saveDrinksJfx(ActionEvent e){
-        try{
-            beverages.saveDrink();
-            drinksTextArea.setText(beverages.listDrinks());
-        } catch (Exception err){
-            System.out.println(err);
+    public void saveDrinksJfx(ActionEvent e) {
+        String filename = "drinks.dat";
+
+        try {
+            beverages.saveDrink(beverages.drinksHashMap, filename);
+            System.out.println("Drink saved successfully to " + filename);
+        } catch (Exception err) {
+            System.out.println("Error saving drink to " + filename);
         }
     }
 
-    public void loadDrinksJfx(ActionEvent e){
-        try {
-            beverages.loadDrink();
-        } catch (Exception err){
-            System.out.println(err);
+    public void loadDrinksJfx(ActionEvent e) {
+        String filename = "drinks.dat"; // Hardcoded filename
+
+        // Attempt to load the drinks from the file
+        MyHashMap<String, Drink> listDrinks = beverages.loadDrink(filename);
+        System.out.println(beverages.loadDrink(filename));
+
+        if (listDrinks != null) {
+            // Update the UI or internal state with the loaded drinks
+            drinksTextArea.setText(beverages.listDrinks());
+
+            // Show success message
+            System.out.println("Drink loaded successfully from " + filename);
+        } else {
+            // If loading failed, show an error message
+            System.out.println("Error loading drinks from file.");
         }
+        drinksTextArea.setText(beverages.listDrinks());
     }
 
     public void sortDrinksJfx(ActionEvent e){

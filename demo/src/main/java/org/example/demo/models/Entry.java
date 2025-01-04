@@ -1,6 +1,9 @@
 package org.example.demo.models;
 
-public class Entry<K, V> {
+import java.io.Serializable;
+
+public class Entry<K, V> implements Serializable {
+
     private K key;
     private V value;
     private Entry<K, V> next;

@@ -1,6 +1,8 @@
 package org.example.demo.models;
 
-public class Drink {
+import java.io.Serializable;
+
+public class Drink implements Serializable {
 
     String name;
     String placeOfOrigin;
@@ -46,11 +48,10 @@ public class Drink {
         this.name = name;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
-        return //name is already called
-                ", from: " + placeOfOrigin +
-                ", " + textualDescription +
-                ", image=" + image;
+    @Override
+    public String toString() {
+        return ", from: " + placeOfOrigin +
+                ", Description: " + textualDescription +
+                ", Image: " + image;
     }
 }
