@@ -43,6 +43,16 @@
                               </AnchorPane>
                         </content>
                       </Tab>
+                        <Tab text="Save/Load">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#saveDrinksJfx" prefHeight="50.0" prefWidth="140.0" text="Save" />
+                                    <Button layoutX="14.0" layoutY="84.0" mnemonicParsing="false" onAction="#loadDrinksJfx" prefHeight="50.0" prefWidth="140.0" text="Load" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
                     </tabs>
                   </TabPane>
                   <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#listDrinksJfx" text="Refresh" />
@@ -78,6 +88,16 @@
                                     <Label layoutX="14.0" layoutY="14.0" minHeight="20.0" text="Enter name of ingredient to remove" />
                                     <TextField fx:id="ingredientsRemoveField" layoutX="14.0" layoutY="34.0" promptText="Ingredient to remove" />
                                     <Button layoutX="14.0" layoutY="60.0" mnemonicParsing="false" onAction="#removeIngredientJfx" style="-fx-background-color: pink;" text="Remove" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Save/Load">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#saveIngredientsJfx" prefHeight="50.0" prefWidth="140.0" text="Save" />
+                                    <Button layoutX="14.0" layoutY="84.0" mnemonicParsing="false" onAction="#loadIngredientsJfx" prefHeight="50.0" prefWidth="140.0" text="Load" />
                                  </children>
                               </AnchorPane>
                            </content>

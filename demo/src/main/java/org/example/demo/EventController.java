@@ -45,6 +45,23 @@ public class EventController {
         drinksTextArea.setText(beverages.listDrinks());
     }
 
+    public void saveDrinksJfx(ActionEvent e){
+        try{
+            beverages.saveDrink();
+            drinksTextArea.setText(beverages.listDrinks());
+        } catch (Exception err){
+            System.out.println(err);
+        }
+    }
+
+    public void loadDrinksJfx(ActionEvent e){
+        try {
+            beverages.loadDrink();
+        } catch (Exception err){
+            System.out.println(err);
+        }
+    }
+
     /**
      * INGREDIENTS METHODS
      */
@@ -71,6 +88,28 @@ public class EventController {
         beverages.removeIngredient(ingredientToRemove);
         ingredientsTextArea.setText(beverages.listIngredients());
     }
+
+    public void saveIngredientsJfx(ActionEvent e){
+        try {
+            beverages.saveIngredient();
+            ingredientsTextArea.setText(beverages.listIngredients());
+        } catch (Exception err){
+            System.out.println(err);
+        }
+    }
+
+    public void loadIngredientsJfx(ActionEvent e){
+        try {
+            beverages.loadIngredient();
+            ingredientsTextArea.setText(beverages.listIngredients());
+        } catch (Exception err){
+            System.out.println(err);
+        }
+    }
+
+
+
+
 
 
 }
