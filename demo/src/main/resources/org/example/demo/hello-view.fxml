@@ -10,11 +10,11 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.EventController">
   <tabs>
-    <Tab fx:id="drinksTextArea" text="Drinks">
+    <Tab text="Drinks">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextArea fx:id="drinksTextArea" layoutX="5.0" layoutY="14.0" prefHeight="445.0" prefWidth="395.0" />
+                  <TextArea fx:id="drinksTextArea" layoutX="5.0" layoutY="39.0" prefHeight="420.0" prefWidth="395.0" />
                   <TabPane layoutX="400.0" layoutY="-1.0" prefHeight="470.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab text="Add/Update">
@@ -22,11 +22,11 @@
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="14.0" minHeight="20.0" text="Please fill the following fields then click GO!" />
-                                    <TextField layoutX="14.0" layoutY="34.0" promptText="Drink Name" />
-                                    <TextField layoutX="14.0" layoutY="60.0" promptText="Origin of drink" />
-                                    <TextField layoutX="14.0" layoutY="86.0" promptText="Description" />
-                                    <TextField layoutX="14.0" layoutY="112.0" promptText="Image Url" />
-                                    <Button layoutX="14.0" layoutY="138.0" mnemonicParsing="false" style="-fx-background-color: lightgreen;" text="GO!" />
+                                    <TextField fx:id="drinkNameField" layoutX="14.0" layoutY="34.0" promptText="Drink Name" />
+                                    <TextField fx:id="drinkOriginField" layoutX="14.0" layoutY="60.0" promptText="Origin of drink" />
+                                    <TextField fx:id="drinkDescriptionField" layoutX="14.0" layoutY="86.0" promptText="Description" />
+                                    <TextField fx:id="drinkImageField" layoutX="14.0" layoutY="112.0" promptText="Image Url" />
+                                    <Button layoutX="14.0" layoutY="138.0" mnemonicParsing="false" onAction="#addDrinkJfx" style="-fx-background-color: lightgreen;" text="GO!" />
                                     <Label layoutX="14.0" layoutY="164.0" minHeight="20.0" prefHeight="40.0" prefWidth="200.0" text="To update a drink enter it's name followed by its updated details" wrapText="true" />
                                  </children>
                               </AnchorPane>
@@ -37,13 +37,15 @@
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="14.0" minHeight="20.0" text="Enter the name of the drink to remove" />
-                                    <TextField layoutX="14.0" layoutY="34.0" promptText="Drink to remove" />
+                                    <TextField fx:id="drinkRemoveField" layoutX="14.0" layoutY="34.0" promptText="Drink to remove" />
+                                    <Button layoutX="14.0" layoutY="60.0" mnemonicParsing="false" style="-fx-background-color: pink;" text="Remove" />
                                  </children>
                               </AnchorPane>
                         </content>
                       </Tab>
                     </tabs>
                   </TabPane>
+                  <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#listDrinksJfx" text="Refresh" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -51,7 +53,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextArea layoutX="5.0" layoutY="14.0" prefHeight="445.0" prefWidth="395.0" />
+                  <TextArea layoutX="5.0" layoutY="39.0" prefHeight="420.0" prefWidth="395.0" />
                   <TabPane layoutX="400.0" layoutY="-1.0" prefHeight="470.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Add/Update">
@@ -74,12 +76,15 @@
                                  <children>
                                     <Label layoutX="14.0" layoutY="14.0" minHeight="20.0" />
                                     <Label layoutX="14.0" layoutY="14.0" minHeight="20.0" text="Enter name of ingredient to remove" />
+                                    <TextField layoutX="14.0" layoutY="34.0" promptText="Ingredient to remove" />
+                                    <Button layoutX="14.0" layoutY="60.0" mnemonicParsing="false" style="-fx-background-color: pink;" text="Remove" />
                                  </children>
                               </AnchorPane>
                            </content>
                         </Tab>
                      </tabs>
                   </TabPane>
+                  <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Refresh" />
                </children>
             </AnchorPane>
          </content>

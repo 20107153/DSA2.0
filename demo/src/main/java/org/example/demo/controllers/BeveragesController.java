@@ -12,7 +12,7 @@ public class BeveragesController {
      */
     public void addDrink(String name, String placeOfOrigin, String textualDescription, String image) {
         Drink drink = new Drink(name, placeOfOrigin, textualDescription, image);
-        drinksHashMap.put(drink.getName(), drink);
+        drinksHashMap.put(name, drink);
     }
 
 
@@ -24,6 +24,9 @@ public class BeveragesController {
         }
     }
 
+    public String listDrinks(){
+        return drinksHashMap.toString();
+    }
 
     /**
      * INGREDIENTS
