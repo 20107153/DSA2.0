@@ -106,6 +106,7 @@
                      </tabs>
                   </TabPane>
                   <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#listIngredientsJfx" text="Refresh" />
+                  <Button layoutX="74.0" layoutY="14.0" mnemonicParsing="false" onAction="#sortIngredientsJfx" text="Sort" />
                </children>
             </AnchorPane>
          </content>
@@ -117,30 +118,50 @@
                   <TextField fx:id="searchTextField" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="300.0" promptText="Enter Search Term" />
                   <TextArea fx:id="resultsTextArea" editable="false" layoutX="14.0" layoutY="53.0" prefHeight="399.0" prefWidth="775.0" />
                   <Button layoutX="324.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchDrinksJfx" text="Search Drinks" />
-                  <Button layoutX="417.0" layoutY="14.0" mnemonicParsing="false" text="Search Ingredients" />
+                  <Button layoutX="417.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchIngredientsJfx" text="Search Ingredients" />
                </children>
             </AnchorPane>
         </content>
       </Tab>
-      <Tab text="Template">
+      <Tab text="Recipies">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextArea layoutX="5.0" layoutY="14.0" prefHeight="445.0" prefWidth="395.0" />
+                  <TextArea fx:id="recipeTextArea" layoutX="5.0" layoutY="39.0" prefHeight="420.0" prefWidth="395.0" />
                   <TabPane layoutX="400.0" layoutY="-1.0" prefHeight="470.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Add/Update">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="recipeNameField" layoutX="14.0" layoutY="14.0" promptText="Recipe Name" />
+                                    <TextField fx:id="recipeDescriptionField" layoutX="14.0" layoutY="40.0" promptText="Description" />
+                                    <Label layoutX="14.0" layoutY="79.0" text="Enter the name of an ingredient to add to the recipe" />
+                                    <Label layoutX="14.0" layoutY="128.0" text="Currently added:" />
+                                    <TextArea fx:id="listRecipeIngredients" editable="false" layoutX="13.0" layoutY="145.0" prefHeight="200.0" prefWidth="375.0" />
+                                    <TextField fx:id="addIngredientToRecipe" layoutX="14.0" layoutY="96.0" promptText="Ingredient Name" />
+                                    <Button layoutX="174.0" layoutY="96.0" mnemonicParsing="false" onAction="#addToRecipeList" text="Add" />
+                                    <Button layoutX="214.0" layoutY="96.0" mnemonicParsing="false" onAction="#clearRecipelist" text="Clear" />
+                                    <Button layoutX="14.0" layoutY="345.0" mnemonicParsing="false" onAction="#addRecipeJFX" style="-fx-background-color: lightgreen;" text="Add Recipie!" />
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
                         <Tab text="Remove">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" minHeight="20.0" />
+                                    <Label layoutX="14.0" layoutY="14.0" minHeight="20.0" text="Enter name of recipe to remove" />
+                                    <TextField fx:id="removeRecipeField" layoutX="14.0" layoutY="34.0" promptText="Recipe to remove" />
+                                    <Button layoutX="14.0" layoutY="60.0" mnemonicParsing="false" onAction="#removeRecipeJfx" style="-fx-background-color: pink;" text="Remove" />
+                                 </children>
+                              </AnchorPane>
                            </content>
                         </Tab>
                      </tabs>
                   </TabPane>
+                  <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#listRecipiesJfx" text="Refresh" />
+                  <Button layoutX="74.0" layoutY="14.0" mnemonicParsing="false" onAction="#listRecipiesJfx" text="Sort" />
                </children>
             </AnchorPane>
          </content>

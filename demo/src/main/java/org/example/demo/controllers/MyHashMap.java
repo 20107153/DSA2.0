@@ -94,9 +94,32 @@ public class MyHashMap<K,V> {
         }
         //cycle through all and compare keys
         while (currentEntry!=null){
-            if (currentEntry.getKey()== key){
+            if (currentEntry.getKey().equals(key)){
                 //It has been found!
                 return currentEntry.getValue();
+            }
+            //Not this one -> get the next one
+            currentEntry=currentEntry.getNext();
+        }
+        //at this point we have gone beyond the existing list
+        //therefore the entry relating to the input key doesn't exist -> return null
+        return null;
+    }
+public Entry<K,V> getEntry(K key){
+        int hash = hashKey(key) % SIZE;
+
+        //find the existing entry at hash
+        Entry<K,V> currentEntry = table[hash];
+
+        //Check if it's empty, if so return null
+        if (currentEntry==null){
+            return null;
+        }
+        //cycle through all and compare keys
+        while (currentEntry!=null){
+            if (currentEntry.getKey().equals(key)){
+                //It has been found!
+                return currentEntry;
             }
             //Not this one -> get the next one
             currentEntry=currentEntry.getNext();
