@@ -25,14 +25,16 @@ public class Recipe implements Serializable {
 
     @Override
     public String toString() {
-        //no need to add name to string the Entry<> already calls it as key
-        String str ="";
-        str+=(description+", ");
-        Entry<String,Ingredient> currentIngredient = headIngredient;
-        while (currentIngredient.getNext()!=null){
-            str+=(currentIngredient+ ", ");
-            currentIngredient.getNext();
+        StringBuilder str = new StringBuilder();
+        str.append(description + ", ");
+        Entry<String, Ingredient> currentIngredient = headIngredient;
+
+        // Iterate through the linked list of ingredients
+        while (currentIngredient != null) { // Iterate until currentIngredient is null
+            str.append(currentIngredient.thisString() + ", ");
+            currentIngredient = currentIngredient.getNext(); // Move to the next ingredient
         }
+
         return str.toString();
     }
 
