@@ -40,17 +40,17 @@ public class Entry<K, V> implements Serializable {
     @Override
     public String toString() {
         Entry<K,V> temp = this;
-        StringBuilder sb = new StringBuilder();
+        String sb ="";
         while (temp != null) {
-            sb.append(temp.key + " -> " + temp.value + ", ");
+            sb+=(temp.key + " -> " + temp.value + ", ");
             temp = temp.next;
         }
-        return sb.toString();
+        return sb;
     }
 
     public String thisString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.key + " -> "+ this.value);
-        return sb.toString();
+        String st ="";
+        st+=(this.key + " -> "+ this.value);
+        return st;
     }
 }

@@ -314,15 +314,14 @@ public Entry<K,V> getEntry(K key){
     //I have no clue is string builder is allowed but this code was the only thing that would work
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        String st ="";
         for (int i = 0; i < SIZE; i++) {
             if (table[i] != null) {
-                sb.append(i + " " + table[i] + "\n");
+                st+=(i + " " + table[i] + "\n");
             } else {
-                sb.append(i + " " + "null" + "\n");
+                st+=(i + " " + "null" + "\n");
             }
         }
-
-        return sb.toString();
+        return st;
     }
 }

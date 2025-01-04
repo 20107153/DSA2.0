@@ -26,11 +26,12 @@ public class Recipe implements Serializable {
     @Override
     public String toString() {
         //no need to add name to string the Entry<> already calls it as key
-        StringBuilder str = new StringBuilder();
-        str.append(description).append(", ");
+        String str ="";
+        str+=(description+", ");
         Entry<String,Ingredient> currentIngredient = headIngredient;
         while (currentIngredient.getNext()!=null){
-            str.append(currentIngredient).append(", ");
+            str+=(currentIngredient+ ", ");
+            currentIngredient.getNext();
         }
         return str.toString();
     }

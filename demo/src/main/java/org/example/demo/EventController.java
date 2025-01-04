@@ -170,6 +170,7 @@ public class EventController {
         if (beverages.getIngredient(addIngredientToRecipe.getText())!=null){
             Entry<String,Ingredient> newItem = beverages.getIngredient(addIngredientToRecipe.getText());
             newItem.setNext(null);
+            newItem.setNext(null);
             if (recipeListHead==null){
                 recipeListHead = newItem;
                 System.out.println("adding new item as head   "+newItem);
