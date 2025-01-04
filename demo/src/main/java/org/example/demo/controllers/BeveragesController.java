@@ -10,10 +10,16 @@ public class BeveragesController {
     /**
      * DRINKS
      */
+    public boolean addDrink(Drink drink) {
+        return drinksHashMap.put(drink);
+    }
 
 
 
     /**
      * INGREDIENTS
      */
+    public boolean addIngredient(String ingredient){
+        return ingredientsHashMap.put(ingredient);
+    }
 }
