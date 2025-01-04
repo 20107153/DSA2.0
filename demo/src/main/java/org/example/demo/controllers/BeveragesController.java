@@ -15,6 +15,16 @@ public class BeveragesController {
     }
 
 
+    public boolean removeDrink(String drinkName){
+        if(drinksHashMap == null){
+            System.out.println("There are no drinks to remove from the system");
+            return false;
+        } else {
+            return drinksHashMap.remove(drinkName);
+        }
+    }
+
+
 
     /**
      * INGREDIENTS
