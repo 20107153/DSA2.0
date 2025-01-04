@@ -21,6 +21,11 @@ public class EventController {
     @FXML
     private TextField ingredientsNameField, ingredientsDescriptionField, ingredientsAbvField, ingredientsRemoveField;
 
+    @FXML
+    private TextArea resultsTextArea;
+    @FXML
+    private TextField searchTextField;
+
 
 
     /**
@@ -108,8 +113,14 @@ public class EventController {
     }
 
 
+    /**
+     * SEARCH METHODS
+     */
 
-
+    public void searchDrinksJfx(ActionEvent e){
+        String searchTerm =searchTextField.getText();
+        resultsTextArea.setText(beverages.searchDrinksByName(searchTerm));
+    }
 
 
 }
