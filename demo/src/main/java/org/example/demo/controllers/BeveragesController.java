@@ -79,6 +79,28 @@ public class BeveragesController {
         return ingredientsHashMap.toString();
     }
 
+    public void saveIngredient() throws Exception
+    {
+        XStream xtream = new XStream(new DomDriver());
+        ObjectOutputStream out =
+                xtream.createObjectOutputStream(new FileWriter("ingredients.xml"));
+        out.writeObject(ingredientsHashMap);
+        out.close();
+    }
+
+    public void loadIngredient() throws Exception
+    {
+        Class<?>[] classes = new Class[] { Ingredient.class };
+
+        XStream xstream = new XStream(new DomDriver());
+        XStream.setupDefaultSecurity(xstream);
+        xstream.allowTypes(classes);
+
+        ObjectInputStream is = xstream.createObjectInputStream(new FileReader("ingredients.xml"));
+        ingredientsHashMap = (MyHashMap<String, Ingredient>) is.readObject();
+        is.close();
+    }
+
 
     /**
      * RECIPES
