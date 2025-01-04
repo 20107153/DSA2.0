@@ -64,10 +64,22 @@ public class BeveragesController {
         Entry<String,Drink> current = listHead;
         String resultString = "";
         while (current.getNext()!=null){
-            resultString+= current + "\n";
+            resultString+= current.thisString() + "\n";
             current=current.getNext();
         }
-        resultString += current;
+        resultString += current.thisString();
+        return resultString;
+    }
+
+    public String sortDrinksAlphabetically(){
+        Entry<String,Drink> listHead = drinksHashMap.sort();
+        Entry<String,Drink> current = listHead;
+        String resultString = "";
+        while (current.getNext()!=null){
+            resultString+= current.thisString() + "\n";
+            current=current.getNext();
+        }
+        resultString += current.thisString();
         return resultString;
     }
 
@@ -113,6 +125,31 @@ public class BeveragesController {
         ObjectInputStream is = xstream.createObjectInputStream(new FileReader("ingredients.xml"));
         ingredientsHashMap = (MyHashMap<String, Ingredient>) is.readObject();
         is.close();
+    }
+
+    public String searchIngredientssByName(String searchTerm){
+        Entry<String,Ingredient> listHead = ingredientsHashMap.searchByName(searchTerm);
+        Entry<String,Ingredient> current = listHead;
+        String resultString = "";
+        while (current.getNext()!=null){
+            resultString+= current.thisString() + "\n";
+            current=current.getNext();
+        }
+        resultString += current.thisString();
+        return resultString;
+    }
+
+
+    public String sortIngredientssAlphabetically(){
+        Entry<String,Ingredient> listHead = ingredientsHashMap.sort();
+        Entry<String,Ingredient> current = listHead;
+        String resultString = "";
+        while (current.getNext()!=null){
+            resultString+= current.thisString() + "\n";
+            current=current.getNext();
+        }
+        resultString += current.thisString();
+        return resultString;
     }
 
 

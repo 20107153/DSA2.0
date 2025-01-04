@@ -39,9 +39,15 @@ public class Entry<K, V> {
         Entry<K,V> temp = this;
         StringBuilder sb = new StringBuilder();
         while (temp != null) {
-            sb.append(temp.key + " -> " + temp.value + ",");
+            sb.append(temp.key + " -> " + temp.value + ", ");
             temp = temp.next;
         }
+        return sb.toString();
+    }
+
+    public String thisString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.key + " -> "+ this.value);
         return sb.toString();
     }
 }

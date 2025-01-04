@@ -67,6 +67,10 @@ public class EventController {
         }
     }
 
+    public void sortDrinksJfx(ActionEvent e){
+        drinksTextArea.setText(beverages.sortDrinksAlphabetically());
+    }
+
     /**
      * INGREDIENTS METHODS
      */
