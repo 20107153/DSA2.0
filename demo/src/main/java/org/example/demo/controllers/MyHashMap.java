@@ -187,25 +187,76 @@ public class MyHashMap<K,V> {
         return resultHead; // Return the head of the result linked list
     }
 
-    public void mapToArray(){
-        Entry<K, V> resultHead = null; // Head of the result linked list
-        Entry<K, V> currentResult = null; // Point to the current entry in the result linked list
-        String[] myArray = new String[0];
+    public int letterCode(String str){
+        char letter = str.charAt(0);
+        int letterCode = (int) letter;
+        return letterCode;
+    }
 
+    public Entry<K, V> sortByKeys() {
+        // Counting the number of entries in the hashtable
+        int totalEntries = 0;
         for (int i = 0; i < SIZE; i++) {
-         Entry<K, V> currentEntry = table[i];
-
-         while (currentEntry != null) {
-             Entry<K,V> newResult = new Entry<>(currentEntry.getKey(), currentEntry.getValue());
-             if (resultHead == null) {
-                 resultHead = newResult;
-             } else {
-                 currentResult.setNext(newResult);
-             }
-
-             myArray[i] = newResult.getKey().toString();
-         }
+            Entry<K, V> currentEntry = table[i];
+            while (currentEntry != null) {
+                totalEntries++;
+                currentEntry = currentEntry.getNext();
+            }
         }
+
+        // Create an array, with the size of total entries, to hold all entries
+        Entry<K, V>[] entriesArray = new Entry[totalEntries];
+        int index = 0;
+        for (int i = 0; i < SIZE; i++) {
+            Entry<K, V> currentEntry = table[i];
+            while (currentEntry != null) {
+                entriesArray[index++] = new Entry<>(currentEntry.getKey(), currentEntry.getValue());
+                currentEntry = currentEntry.getNext();
+            }
+        }
+
+        // Step 2: Sort the array using Selection Sort
+        for (int i = 0; i < totalEntries - 1; i++) {
+            // Assume the minimum is at index i
+            int minIndex = i;
+
+            // Find the smallest key in the unsorted portion
+            for (int j = i + 1; j < totalEntries; j++) {
+                //makes key from minIndex and j(comparisonStr)
+                String minIndexStr = (String)entriesArray[minIndex].getKey();
+                String comparisonStr = (String)entriesArray[j].getKey();
+
+                //compares if value to compare(j) is less than the minimum index, if it is. then update minimum index to j
+                if (letterCode(comparisonStr) < letterCode(minIndexStr)){
+                    minIndex = j;
+                }
+
+            }
+
+
+            // Swap the minimum element with the first element of the unsorted portion
+            if (minIndex != i) {
+                Entry<K, V> temp = entriesArray[i];
+                entriesArray[i] = entriesArray[minIndex];
+                entriesArray[minIndex] = temp;
+            }
+        }
+
+        // Step 3: Convert the sorted array back into a linked list
+        Entry<K, V> sortedHead = null;
+        Entry<K, V> currentResult = null;
+
+        for (Entry<K, V> entry : entriesArray) {
+            if (sortedHead == null) {
+                sortedHead = new Entry<>(entry.getKey(), entry.getValue());
+                currentResult = sortedHead;
+            } else {
+                currentResult.setNext(new Entry<>(entry.getKey(), entry.getValue()));
+                currentResult = currentResult.getNext();
+            }
+        }
+
+        return sortedHead;
     }
 
     //I have no clue is string builder is allowed but this code was the only thing that would work
