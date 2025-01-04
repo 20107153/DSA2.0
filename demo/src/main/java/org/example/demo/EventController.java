@@ -8,7 +8,7 @@ import org.example.demo.models.Entry;
 import org.example.demo.models.Ingredient;
 import org.example.demo.controllers.MyHashMap;
 import org.example.demo.models.Drink;
-
+import org.example.demo.models.Ingredient;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -115,6 +115,8 @@ public class EventController {
             ingredientsTextArea.setText(beverages.listIngredients());
         } catch (NumberFormatException err){
             System.out.println("Invalid abv entered, must be double");
+        } catch (IndexOutOfBoundsException err){
+            System.out.println("Invalid abv entered, must be double");
         }
     }
 
@@ -124,22 +126,35 @@ public class EventController {
         ingredientsTextArea.setText(beverages.listIngredients());
     }
 
-    public void saveIngredientsJfx(ActionEvent e){
+    public void saveIngredientsJfx(ActionEvent e) {
+        String filename = "ingredients.dat";
+
         try {
-            beverages.saveIngredient();
-            ingredientsTextArea.setText(beverages.listIngredients());
-        } catch (Exception err){
-            System.out.println(err);
+            beverages.saveIngredient(beverages.ingredientsHashMap, filename);
+            System.out.println("Ingredient saved successfully to " + filename);
+        } catch (Exception err) {
+            System.out.println("Error saving drink to " + filename);
         }
     }
 
-    public void loadIngredientsJfx(ActionEvent e){
-        try {
-            beverages.loadIngredient();
+    public void loadIngredientsJfx(ActionEvent e) {
+        String filename = "ingredients.dat"; // Hardcoded filename
+
+        // Attempt to load the drinks from the file
+        MyHashMap<String, Ingredient> listIngredients = beverages.loadIngredient(filename);
+        System.out.println(beverages.loadIngredient(filename));
+
+        if (listIngredients != null) {
+            // Update the UI or internal state with the loaded drinks
             ingredientsTextArea.setText(beverages.listIngredients());
-        } catch (Exception err){
-            System.out.println(err);
+
+            // Show success message
+            System.out.println("Drink loaded successfully from " + filename);
+        } else {
+            // If loading failed, show an error message
+            System.out.println("Error loading drinks from file.");
         }
+        ingredientsTextArea.setText(beverages.listIngredients());
     }
 
     public void sortIngredientsJfx(ActionEvent e){

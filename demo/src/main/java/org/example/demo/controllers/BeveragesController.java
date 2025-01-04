@@ -13,7 +13,7 @@ import org.example.demo.models.Recipe;
 
 public class BeveragesController {
     public MyHashMap<String, Drink> drinksHashMap = new MyHashMap<>();
-    MyHashMap<String, Ingredient> ingredientsHashMap = new MyHashMap<>();
+    public MyHashMap<String, Ingredient> ingredientsHashMap = new MyHashMap<>();
     MyHashMap<String, Recipe> recipeHashMap = new MyHashMap<>();
 
     /**
@@ -72,14 +72,7 @@ public class BeveragesController {
             drinksHashMap = (MyHashMap<String, Drink>) ois.readObject();
             System.out.println("Drinks loaded successfully from " + filename);
             return drinksHashMap;
-        } catch (ClassNotFoundException cnfe) {
-            System.err.println("Class not found exception: " + cnfe.getMessage());
-            cnfe.printStackTrace();
-        } catch (IOException ioe) {
-            System.err.println("IO exception during deserialization: " + ioe.getMessage());
-            ioe.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("An error occurred during deserialization: " + e.getMessage());
+        } catch (Exception e){
             e.printStackTrace();
         }
         return null;
@@ -107,26 +100,25 @@ public class BeveragesController {
 
     //This save and load can be found in prog fund 2, part 5, XML and Java.
     //The arrayList has been replaced with hashMap, not sure if it will work
-    public void saveIngredient() throws Exception
-    {
-        XStream xtream = new XStream(new DomDriver());
-        ObjectOutputStream out =
-                xtream.createObjectOutputStream(new FileWriter("ingredients.xml"));
-        out.writeObject(ingredientsHashMap);
-        out.close();
+    public void saveIngredient(MyHashMap<String, Ingredient> ingredientsHashMap, String filename){
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))){
+            oos.writeObject(ingredientsHashMap);
+            System.out.println("Ingredients saved successfully to " + filename);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    public void loadIngredient() throws Exception
-    {
-        Class<?>[] classes = new Class[] { Ingredient.class };
 
-        XStream xstream = new XStream(new DomDriver());
-        XStream.setupDefaultSecurity(xstream);
-        xstream.allowTypes(classes);
-
-        ObjectInputStream is = xstream.createObjectInputStream(new FileReader("ingredients.xml"));
-        ingredientsHashMap = (MyHashMap<String, Ingredient>) is.readObject();
-        is.close();
+    public MyHashMap<String, Ingredient> loadIngredient(String filename) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            ingredientsHashMap = (MyHashMap<String, Ingredient>) ois.readObject();
+            System.out.println("Ingredients loaded successfully from " + filename);
+            return ingredientsHashMap;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String searchIngredientssByName(String searchTerm){
