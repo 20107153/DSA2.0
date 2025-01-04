@@ -57,4 +57,12 @@ public class BeveragesController {
         Recipe addRecipe = new Recipe(name, description, headIngredient);
         recipeHashMap.put(addRecipe.getName(), addRecipe);
     }
+
+    public void removeRecipe(String recipeName){
+        recipeHashMap.remove(recipeName);
+    }
+
+    public String listRecipes(){
+        return recipeHashMap.toString();
+    }
 }
