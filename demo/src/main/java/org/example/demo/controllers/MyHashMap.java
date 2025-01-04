@@ -193,7 +193,7 @@ public class MyHashMap<K,V> {
         return letterCode;
     }
 
-    public Entry<K, V> sortByKeys() {
+    public Entry<K, V> sort() {
         // Counting the number of entries in the hashtable
         int totalEntries = 0;
         for (int i = 0; i < SIZE; i++) {
