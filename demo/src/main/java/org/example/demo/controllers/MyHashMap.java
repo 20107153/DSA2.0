@@ -175,34 +175,36 @@ public Entry<K,V> getEntry(K key){
     }
 
     public Entry<K, V> sortLinkedList(Entry<K, V> head) {
+        //Checks if the list is empty, there would be no need to sort
         if (head == null || head.getNext() == null) {
-            return head; // List is empty or has only one entry, no need to sort
+            return head;
         }
 
-        Entry<K, V> sortedList = null; // This will be the sorted linked list
+        Entry<K, V> sortedHead = head;
 
-        // Traverse through the given linked list
-        while (head != null) {
-            Entry<K, V> current = head;
-            head = head.getNext();
-
-            // Insert current entry into the sorted linked list
-            if (sortedList == null || ((String) current.getKey()).compareTo((String) sortedList.getKey()) < 0) {
-                // Insert at the beginning of sorted list
-                current.setNext(sortedList);
-                sortedList = current;
-            } else {
-                // Find the position to insert the current element
-                Entry<K, V> search = sortedList;
-                while (search.getNext() != null && ((String) current.getKey()).compareTo((String) search.getNext().getKey()) > 0) {
-                    search = search.getNext();
+        for (Entry<K, V> current = sortedHead; current != null; current = current.getNext()) {
+            // Finds the minimum node (minNode), and checks vs the next node (compare)
+            Entry<K, V> minNode = current;
+            for (Entry<K, V> compare = current.getNext(); compare != null; compare = compare.getNext()) {
+                //if compare is less than minimum, they swap places.
+                if (((String) compare.getKey()).compareTo((String) minNode.getKey()) < 0) {
+                    minNode = compare;
                 }
-                // Insert the current entry after 'search'
-                current.setNext(search.getNext());
-                search.setNext(current);
+            }
+
+            // Creating temporary values and keys to swap the min node and the current.
+            if (minNode != current) {
+                // Swap the key and value of the nodes
+                K tempKey = current.getKey();
+                V tempValue = current.getValue();
+                current.setKey(minNode.getKey());
+                current.setValue(minNode.getValue());
+                minNode.setKey(tempKey);
+                minNode.setValue(tempValue);
             }
         }
-        return sortedList; // Return the head of the sorted linked list
+
+        return sortedHead;
     }
 
     /**
@@ -267,7 +269,6 @@ public Entry<K,V> getEntry(K key){
             }
         }
 
-        // Step 2: Sort the array using Selection Sort
         for (int i = 0; i < totalEntries - 1; i++) {
             // Assume the minimum is at index i
             int minIndex = i;

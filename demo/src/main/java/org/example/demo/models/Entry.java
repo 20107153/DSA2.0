@@ -18,6 +18,10 @@ public class Entry<K, V> implements Serializable {
         return key;
     }
 
+    public void setKey(K key) {
+        this.key = key;
+    }
+
     public V getValue() {
         return value;
     }
