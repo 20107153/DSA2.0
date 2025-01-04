@@ -2,10 +2,11 @@ package org.example.demo;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.example.demo.controllers.BeveragesController;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class EventController {
     private BeveragesController beverages = new BeveragesController();
@@ -14,6 +15,12 @@ public class EventController {
     private TextArea drinksTextArea;
     @FXML
     private TextField drinkNameField, drinkOriginField, drinkDescriptionField, drinkImageField, drinkRemoveField;
+
+    @FXML
+    private TextArea ingredientsTextArea;
+    @FXML
+    private TextField ingredientsNameField, ingredientsDescriptionField, ingredientsAbvField, ingredientsRemoveField;
+
 
 
     /**
@@ -35,8 +42,34 @@ public class EventController {
     public void removeDrinkJfx(ActionEvent e){
         String drinkToRemove = drinkRemoveField.getText();
         beverages.removeDrink(drinkToRemove);
-        System.out.println("Remove Drink"+ drinkToRemove);
         drinksTextArea.setText(beverages.listDrinks());
+    }
+
+    /**
+     * INGREDIENTS METHODS
+     */
+
+    public void listIngredientsJfx(ActionEvent e){
+        ingredientsTextArea.setText(beverages.listIngredients());
+    }
+
+    public void addIngredientJfx(ActionEvent e){
+        try {
+            String name = ingredientsNameField.getText();
+            String description = ingredientsDescriptionField.getText();
+            String abvText = ingredientsAbvField.getText();
+            Double abv= Double.parseDouble(abvText);
+            beverages.addIngredient(name,description,abv);
+            ingredientsTextArea.setText(beverages.listIngredients());
+        } catch (NumberFormatException err){
+            System.out.println("Invalid abv entered, must be double");
+        }
+    }
+
+    public void removeIngredientJfx(ActionEvent e){
+        String ingredientToRemove = ingredientsRemoveField.getText();
+        beverages.removeIngredient(ingredientToRemove);
+        ingredientsTextArea.setText(beverages.listIngredients());
     }
 
 

@@ -4,9 +4,9 @@ public class Ingredient {
 
     String name;
     String textualDescription;
-    float ABV;
+    Double ABV;
 
-    public Ingredient(String name, String textual_description, float ABV) {
+    public Ingredient(String name, String textual_description, Double ABV) {
         this.name = name;
         this.textualDescription = textual_description;
         this.ABV = ABV;
@@ -28,11 +28,11 @@ public class Ingredient {
         this.textualDescription = textualDescription;
     }
 
-    public float getABV() {
+    public Double getABV() {
         return ABV;
     }
 
-    public void setABV(float ABV) {
+    public void setABV(Double ABV) {
         this.ABV = ABV;
     }
 

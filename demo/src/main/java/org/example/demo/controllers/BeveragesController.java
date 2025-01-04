@@ -28,7 +28,7 @@ public class BeveragesController {
     /**
      * INGREDIENTS
      */
-    public void addIngredient(String name, String textualDescription, int ABV) {
+    public void addIngredient(String name, String textualDescription, Double ABV) {
         Ingredient ingredient = new Ingredient(name, textualDescription, ABV);
         ingredientsHashMap.put(ingredient.getName(), ingredient);
     }
@@ -40,6 +40,11 @@ public class BeveragesController {
             ingredientsHashMap.remove(ingredientName);
         }
     }
+
+    public String listIngredients(){
+        return ingredientsHashMap.toString();
+    }
+
 
     /**
      * RECIPES
