@@ -174,6 +174,37 @@ public Entry<K,V> getEntry(K key){
 
     }
 
+    public Entry<K, V> sortLinkedList(Entry<K, V> head) {
+        if (head == null || head.getNext() == null) {
+            return head; // List is empty or has only one entry, no need to sort
+        }
+
+        Entry<K, V> sortedList = null; // This will be the sorted linked list
+
+        // Traverse through the given linked list
+        while (head != null) {
+            Entry<K, V> current = head;
+            head = head.getNext();
+
+            // Insert current entry into the sorted linked list
+            if (sortedList == null || ((String) current.getKey()).compareTo((String) sortedList.getKey()) < 0) {
+                // Insert at the beginning of sorted list
+                current.setNext(sortedList);
+                sortedList = current;
+            } else {
+                // Find the position to insert the current element
+                Entry<K, V> search = sortedList;
+                while (search.getNext() != null && ((String) current.getKey()).compareTo((String) search.getNext().getKey()) > 0) {
+                    search = search.getNext();
+                }
+                // Insert the current entry after 'search'
+                current.setNext(search.getNext());
+                search.setNext(current);
+            }
+        }
+        return sortedList; // Return the head of the sorted linked list
+    }
+
     /**
      * Searches the hashmap for all entries with a key that contains the given name.
      */
@@ -208,6 +239,8 @@ public Entry<K,V> getEntry(K key){
                 currentEntry = currentEntry.getNext();
             }
         }
+        resultHead = sortLinkedList(resultHead);
+
         System.out.println(resultHead);
         return resultHead; // Return the head of the result linked list
     }

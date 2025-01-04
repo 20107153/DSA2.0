@@ -98,8 +98,6 @@ public class BeveragesController {
         return ingredientsHashMap.toString();
     }
 
-    //This save and load can be found in prog fund 2, part 5, XML and Java.
-    //The arrayList has been replaced with hashMap, not sure if it will work
     public void saveIngredient(MyHashMap<String, Ingredient> ingredientsHashMap, String filename){
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))){
             oos.writeObject(ingredientsHashMap);

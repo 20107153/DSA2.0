@@ -223,7 +223,7 @@ public class EventController {
      */
 
     public void searchDrinksJfx(ActionEvent e){
-        String searchTerm =searchTextField.getText();
+        String searchTerm = searchTextField.getText();
         resultsTextArea.setText(beverages.searchDrinksByName(searchTerm));
     }
 
