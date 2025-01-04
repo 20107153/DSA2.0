@@ -211,12 +211,6 @@ public Entry<K,V> getEntry(K key){
         return resultHead; // Return the head of the result linked list
     }
 
-    public int letterCode(String str){
-        char letter = str.charAt(0);
-        int letterCode = (int) letter;
-        return letterCode;
-    }
-
     public Entry<K, V> sort() {
         // Counting the number of entries in the hashtable
         int totalEntries = 0;
