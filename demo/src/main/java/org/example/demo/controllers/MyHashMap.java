@@ -3,8 +3,6 @@ package org.example.demo.controllers;
 import org.example.demo.models.Entry;
 import java.io.Serializable;
 
-import java.util.Arrays;
-
 public class MyHashMap<K,V> implements Serializable {
     private final int SIZE = 11;
     private Entry<K,V> table[]; //Initialised in constructor

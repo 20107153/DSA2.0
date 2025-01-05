@@ -1,8 +1,5 @@
 package org.example.demo.controllers;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-
 import java.io.*;
 
 import org.example.demo.models.Drink;
