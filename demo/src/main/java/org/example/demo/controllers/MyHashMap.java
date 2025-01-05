@@ -211,8 +211,8 @@ public Entry<K,V> getEntry(K key){
      * Searches the hashmap for all entries with a key that contains the given name.
      */
     public Entry<K, V> searchByName(String name) {
-        Entry<K, V> resultHead = null; // Head of the result linked list
-        Entry<K, V> currentResult = null; // Point to the current entry in the result linked list
+        Entry<K, V> resultHead = null; // Head entry in linked list
+        Entry<K, V> currentResult = null; // Current entry in linked list
 
         // Iterate through all buckets
         for (int i = 0; i < SIZE; i++) {
@@ -228,14 +228,14 @@ public Entry<K,V> getEntry(K key){
                         // Create a new entry for the result linked list
                         Entry<K, V> newResult = new Entry<>(currentEntry.getKey(), currentEntry.getValue());
                         newResult.setNext(null);
-                        //If this is the first matching rsult, make it the head
+                        //If this is the first matching result, make it the head
                         if (resultHead == null) {
                             resultHead = newResult;
                         } else {
-                            currentResult.setNext(newResult); // Append to the result list
+                            currentResult.setNext(newResult);
                         }
 
-                        currentResult = newResult; // Move the current pointer
+                        currentResult = newResult; // Move the current pointer forward
                     }
                 }
                 currentEntry = currentEntry.getNext();
@@ -244,11 +244,11 @@ public Entry<K,V> getEntry(K key){
         resultHead = sortLinkedList(resultHead);
 
         System.out.println(resultHead);
-        return resultHead; // Return the head of the result linked list
+        return resultHead;
     }
 
     public Entry<K, V> sort() {
-        // Counting the number of entries in the hashtable
+        // Counting the total number of entries in the hashtable
         int totalEntries = 0;
         for (int i = 0; i < SIZE; i++) {
             Entry<K, V> currentEntry = table[i];
@@ -264,6 +264,7 @@ public Entry<K,V> getEntry(K key){
         for (int i = 0; i < SIZE; i++) {
             Entry<K, V> currentEntry = table[i];
             while (currentEntry != null) {
+                // Creates any particular entry in the array based on its index, and then iterates the linked list.
                 entriesArray[index++] = new Entry<>(currentEntry.getKey(), currentEntry.getValue());
                 currentEntry = currentEntry.getNext();
             }
@@ -287,7 +288,7 @@ public Entry<K,V> getEntry(K key){
             }
 
 
-            // Swap the minimum element with the first element of the unsorted portion
+            // Swapping the minimum element with the unsorted first element
             if (minIndex != i) {
                 Entry<K, V> temp = entriesArray[i];
                 entriesArray[i] = entriesArray[minIndex];
@@ -295,7 +296,7 @@ public Entry<K,V> getEntry(K key){
             }
         }
 
-        // Step 3: Convert the sorted array back into a linked list
+        // Converting array into linked list
         Entry<K, V> sortedHead = null;
         Entry<K, V> currentResult = null;
 
@@ -312,7 +313,6 @@ public Entry<K,V> getEntry(K key){
         return sortedHead;
     }
 
-    //I have no clue is string builder is allowed but this code was the only thing that would work
     @Override
     public String toString() {
         String st ="";
