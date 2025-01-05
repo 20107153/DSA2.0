@@ -400,18 +400,6 @@ public class EventController<Vbox> {
                 vbox.getChildren().add(new javafx.scene.control.Label("Description: " + drink.getTextualDescription()));
                 vbox.getChildren().add(new javafx.scene.control.Label("Image: " + drink.getImage()));
 
-                Button deleteButton = new Button("Delete");
-                deleteButton.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
-                deleteButton.setOnAction(deleteEvent -> {
-                    beverages.removeDrink(name);
-                    drinkButtonsHashMap.remove(name);
-                    resultsVBox.getChildren().remove(drinkButton);
-                    drinksFlowPane.getChildren().remove(drinkButton);
-                    dialog.close();
-                });
-
-                vbox.getChildren().add(deleteButton);
-
                 dialog.getDialogPane().setContent(vbox);
                 dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
                 dialog.showAndWait();
@@ -434,17 +422,6 @@ public class EventController<Vbox> {
                 vbox.setPrefWidth(300);
                 vbox.getChildren().add(new javafx.scene.control.Label("Description: " + ingredient.getTextualDescription()));
                 vbox.getChildren().add(new javafx.scene.control.Label("ABV: " + ingredient.getABV()));
-
-                Button deleteButton = new Button("Delete");
-                deleteButton.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
-                deleteButton.setOnAction(deleteEvent -> {
-                    beverages.removeIngredient(name);
-                    ingredientButtonsHashMap.remove(name);
-                    ingredientsFlowPane.getChildren().remove(ingredientButton);
-                    dialog.close();
-                });
-
-                vbox.getChildren().add(deleteButton);
 
                 dialog.getDialogPane().setContent(vbox);
                 dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
