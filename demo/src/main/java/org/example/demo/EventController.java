@@ -21,17 +21,9 @@ public class EventController<Vbox> {
     private BeveragesController beverages = new BeveragesController();
 
     @FXML
-    private TextArea drinksTextArea;
-    @FXML
     private TextField drinkNameField, drinkOriginField, drinkDescriptionField, drinkImageField;
-
-    @FXML
-    private TextArea ingredientsTextArea;
     @FXML
     private TextField ingredientsNameField, ingredientsDescriptionField, ingredientsAbvField;
-
-    @FXML
-    private TextArea resultsTextArea;
     @FXML
     private TextField searchTextField;
     @FXML
