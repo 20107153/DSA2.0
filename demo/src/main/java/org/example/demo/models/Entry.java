@@ -37,10 +37,8 @@ public class Entry<K, V> implements Serializable {
         return next;
     }
 
-    //Since the hashTable will only call the toString of first value,
+    // Since the hashTable will only call the toString of first value,
     // the toString of an Entry will include all that follows
-    //
-    //I have no clue is string builder is allowed but this code was the only thing that would work
     @Override
     public String toString() {
         Entry<K,V> temp = this;
