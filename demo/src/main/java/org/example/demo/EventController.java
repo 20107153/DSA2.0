@@ -147,7 +147,8 @@ public class EventController<Vbox> {
             drinkButtonsHashMap = emptyHashMap;
             Entry<String, Drink> listHead = beverages.returnListSortedDrinks();
             Entry<String, Drink> currentEntry = listHead;
-            while (currentEntry.getNext() != null) {
+            while (currentEntry != null) {
+                System.out.println("key" +currentEntry.getKey());
                 String name = currentEntry.getKey();
                 makeDrinkButton(name);
                 currentEntry = currentEntry.getNext();
