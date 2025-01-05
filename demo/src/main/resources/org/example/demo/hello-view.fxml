@@ -158,10 +158,20 @@
                               </AnchorPane>
                            </content>
                         </Tab>
+                        <Tab text="Save/Load">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#saveRecipesJfx" prefHeight="50.0" prefWidth="140.0" text="Save" />
+                                    <Button layoutX="14.0" layoutY="84.0" mnemonicParsing="false" onAction="#loadRecipesJfx" prefHeight="50.0" prefWidth="140.0" text="Load" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
                      </tabs>
                   </TabPane>
                   <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#listRecipiesJfx" text="Refresh" />
-                  <Button layoutX="74.0" layoutY="14.0" mnemonicParsing="false" onAction="#listRecipiesJfx" text="Sort" />
+                  <Button layoutX="74.0" layoutY="14.0" mnemonicParsing="false" onAction="#sortRecipesJfx" text="Sort" />
                </children>
             </AnchorPane>
          </content>

@@ -14,7 +14,7 @@ import org.example.demo.models.Recipe;
 public class BeveragesController {
     public MyHashMap<String, Drink> drinksHashMap = new MyHashMap<>();
     public MyHashMap<String, Ingredient> ingredientsHashMap = new MyHashMap<>();
-    MyHashMap<String, Recipe> recipeHashMap = new MyHashMap<>();
+    public MyHashMap<String, Recipe> recipeHashMap = new MyHashMap<>();
 
     /**
      * DRINKS
@@ -165,4 +165,37 @@ public class BeveragesController {
     public String listRecipes(){
         return recipeHashMap.toString();
     }
+
+    public String sortRecipesAlphabetically(){
+        Entry<String,Recipe> listHead = recipeHashMap.sort();
+        Entry<String,Recipe> current = listHead;
+        String resultString = "";
+        while (current.getNext()!=null){
+            resultString+= current.thisString() + "\n";
+            current=current.getNext();
+        }
+        resultString += current.thisString();
+        return resultString;
+    }
+
+    public void saveRecipe(MyHashMap<String, Recipe> recipeHashMap, String filename){
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))){
+            oos.writeObject(recipeHashMap);
+            System.out.println("Recipes saved successfully to " + filename);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public MyHashMap<String, Recipe> loadRecipe(String filename) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            recipeHashMap = (MyHashMap<String, Recipe>) ois.readObject();
+            System.out.println("Ingredients loaded successfully from " + filename);
+            return recipeHashMap;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

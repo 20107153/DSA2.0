@@ -4,10 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.example.demo.controllers.BeveragesController;
-import org.example.demo.models.Entry;
-import org.example.demo.models.Ingredient;
+import org.example.demo.models.*;
 import org.example.demo.controllers.MyHashMap;
-import org.example.demo.models.Drink;
 import org.example.demo.models.Ingredient;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -170,7 +168,21 @@ public class EventController {
         if (beverages.getIngredient(addIngredientToRecipe.getText())!=null){
             Entry<String,Ingredient> newItem = beverages.getIngredient(addIngredientToRecipe.getText());
             newItem.setNext(null);
-            newItem.setNext(null);
+
+            Entry<String, Ingredient> checkSimilarEntry = recipeListHead;
+            while (checkSimilarEntry != null) {
+                if (checkSimilarEntry.getKey().equals(newItem.getKey())) {
+                    System.out.println("Item already exists in the recipe list: " + newItem);
+                    return; // Exit the method without adding the item
+                }
+                checkSimilarEntry = checkSimilarEntry.getNext();
+            }
+
+            // Create a new copy of the item to avoid shared references
+            Entry<String, Ingredient> newEntry = new Entry<>(newItem.getKey(), newItem.getValue());
+            newEntry.setNext(null); // Ensure the new item's next is null
+
+            // Add the new item to the recipe list
             if (recipeListHead==null){
                 recipeListHead = newItem;
                 System.out.println("adding new item as head   "+newItem);
@@ -213,9 +225,43 @@ public class EventController {
         beverages.removeRecipe(st);
         recipeTextArea.setText(beverages.listRecipes());
     }
+    @FXML
+    private void sortRecipesJfx(ActionEvent e){
+        recipeTextArea.setText(beverages.sortRecipesAlphabetically());
+    }
 
+    @FXML
+    public void saveRecipesJfx(ActionEvent e) {
+        String filename = "recipes.dat";
 
+        try {
+            beverages.saveRecipe(beverages.recipeHashMap, filename);
+            System.out.println("Recipes saved successfully to " + filename);
+        } catch (Exception err) {
+            System.out.println("Error saving recipe to " + filename);
+        }
+    }
 
+    @FXML
+    public void loadRecipesJfx(ActionEvent e) {
+        String filename = "recipes.dat"; // Hardcoded filename
+
+        // Attempt to load the drinks from the file
+        MyHashMap<String, Recipe> listRecipes = beverages.loadRecipe(filename);
+        System.out.println(beverages.loadRecipe(filename));
+
+        if (listRecipes != null) {
+            // Update the UI or internal state with the loaded drinks
+            recipeTextArea.setText(beverages.listRecipes());
+
+            // Show success message
+            System.out.println("Recipe loaded successfully from " + filename);
+        } else {
+            // If loading failed, show an error message
+            System.out.println("Error loading Recipes from file.");
+        }
+        recipeTextArea.setText(beverages.listRecipes());
+    }
 
 
 

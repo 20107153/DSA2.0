@@ -45,10 +45,11 @@ public class Entry<K, V> implements Serializable {
     public String toString() {
         Entry<K,V> temp = this;
         String sb ="";
-        while (temp != null) {
+        while (temp.getNext() != null) {
             sb+=(temp.key + " -> " + temp.value + ", ");
             temp = temp.next;
         }
+        sb+=(temp.key + " -> " + temp.value + ", ");
         return sb;
     }
 
