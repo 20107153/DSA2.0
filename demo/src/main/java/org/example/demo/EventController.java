@@ -2,20 +2,15 @@ package org.example.demo;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import org.example.demo.controllers.BeveragesController;
 import org.example.demo.models.*;
 import org.example.demo.controllers.MyHashMap;
 import org.example.demo.models.Ingredient;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Button;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class EventController<Vbox> {
     private BeveragesController beverages = new BeveragesController();
