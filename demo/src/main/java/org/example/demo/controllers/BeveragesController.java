@@ -30,16 +30,9 @@ public class BeveragesController {
         System.out.println("Beverages remove"+ drinkName);
     }
 
-    public String searchDrinksByName(String searchTerm){
+    public Entry<String, Drink> searchDrinksByName(String searchTerm){
         Entry<String,Drink> listHead = drinksHashMap.searchByName(searchTerm);
-        Entry<String,Drink> current = listHead;
-        String resultString = "";
-        while (current.getNext()!=null){
-            resultString+= current.thisString() + "\n";
-            current=current.getNext();
-        }
-        resultString += current.thisString();
-        return resultString;
+        return listHead;
     }
 
 

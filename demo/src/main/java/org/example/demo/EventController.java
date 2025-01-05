@@ -46,6 +46,8 @@ public class EventController<Vbox> {
     private FlowPane drinksFlowPane;
     @FXML
     private FlowPane ingredientsFlowPane;
+    @FXML
+    private VBox resultsVBox;
 
     private MyHashMap<String, Button> drinkButtonsHashMap = new MyHashMap<>();
     private MyHashMap<String, Button> ingredientButtonsHashMap = new MyHashMap<>();
@@ -362,9 +364,57 @@ public class EventController<Vbox> {
      * SEARCH METHODS
      */
 
+    private void makeDrinkResultButton(String name) {
+        Button drinkButton = new Button(name);
+        drinkButton.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
+
+        drinkButton.setOnAction(event -> {
+            Drink drink = beverages.getDrink(name);
+            if (drink != null) {
+                Dialog<ButtonType> dialog = new Dialog<>();
+                dialog.setTitle("Drink Information");
+                dialog.setHeaderText(drink.getName());
+
+                VBox vbox = new VBox();
+                vbox.setPrefWidth(300);
+                vbox.getChildren().add(new javafx.scene.control.Label("Origin: " + drink.getPlaceOfOrigin()));
+                vbox.getChildren().add(new javafx.scene.control.Label("Description: " + drink.getTextualDescription()));
+                vbox.getChildren().add(new javafx.scene.control.Label("Image: " + drink.getImage()));
+
+                Button deleteButton = new Button("Delete");
+                deleteButton.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
+                deleteButton.setOnAction(deleteEvent -> {
+                    beverages.removeDrink(name);
+                    drinkButtonsHashMap.remove(name);
+                    resultsVBox.getChildren().remove(drinkButton);
+                    dialog.close();
+                });
+
+                vbox.getChildren().add(deleteButton);
+
+                dialog.getDialogPane().setContent(vbox);
+                dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+                dialog.showAndWait();
+            }
+        });
+        drinkButtonsHashMap.put(name, drinkButton);
+        sortButtons(drinkButtonsHashMap);
+        resultsVBox.getChildren().add(drinkButton);
+    }
+
     public void searchDrinksJfx(ActionEvent e){
         String searchTerm = searchTextField.getText();
-        resultsTextArea.setText(beverages.searchDrinksByName(searchTerm));
+
+        Entry<String, Drink> listHead = beverages.searchDrinksByName(searchTerm);
+        Entry<String, Drink> currentEntry = listHead;
+
+        while (currentEntry.getNext() != null) {
+            String name = currentEntry.getKey();
+            makeDrinkResultButton(name);
+            currentEntry = currentEntry.getNext();
+        }
+        String name = currentEntry.getKey();
+        makeDrinkResultButton(name);
     }
 
     public void searchIngredientsJfx(ActionEvent e){
