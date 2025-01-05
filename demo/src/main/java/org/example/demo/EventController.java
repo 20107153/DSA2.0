@@ -23,12 +23,12 @@ public class EventController<Vbox> {
     @FXML
     private TextArea drinksTextArea;
     @FXML
-    private TextField drinkNameField, drinkOriginField, drinkDescriptionField, drinkImageField, drinkRemoveField;
+    private TextField drinkNameField, drinkOriginField, drinkDescriptionField, drinkImageField;
 
     @FXML
     private TextArea ingredientsTextArea;
     @FXML
-    private TextField ingredientsNameField, ingredientsDescriptionField, ingredientsAbvField, ingredientsRemoveField;
+    private TextField ingredientsNameField, ingredientsDescriptionField, ingredientsAbvField;
 
     @FXML
     private TextArea resultsTextArea;
@@ -105,9 +105,7 @@ public class EventController<Vbox> {
         drinksFlowPane.getChildren().add(drinkButton);
     }
 
-    public void listDrinksJfx(ActionEvent e){
-        drinksTextArea.setText(beverages.listDrinks());
-    }
+
 
     public void addDrinkJfx(ActionEvent e){
         String name = drinkNameField.getText();
@@ -120,21 +118,6 @@ public class EventController<Vbox> {
         makeDrinkButton(name);
     }
 
-    public void removeDrinkJfx(ActionEvent e){
-        String drinkToRemove = drinkRemoveField.getText();
-        beverages.removeDrink(drinkToRemove);
-
-        Button buttonToRemove = drinkButtonsHashMap.get(drinkToRemove);
-        if (buttonToRemove != null){
-            drinksFlowPane.getChildren().remove(buttonToRemove);
-            drinkButtonsHashMap.remove(drinkToRemove);
-        }
-        sortButtons(drinkButtonsHashMap);
-    }
-
-    public void sortDrinksJfx(ActionEvent e){
-        drinksTextArea.setText(beverages.sortDrinksAlphabetically());
-    }
 
 
     public void saveDrinksJfx(ActionEvent e) {
@@ -217,9 +200,7 @@ public class EventController<Vbox> {
         ingredientsFlowPane.getChildren().add(ingredientButton);
     }
 
-    public void listIngredientsJfx(ActionEvent e){
-        ingredientsTextArea.setText(beverages.listIngredients());
-    }
+
 
     public void addIngredientJfx(ActionEvent e){
         String name = ingredientsNameField.getText();
@@ -230,11 +211,6 @@ public class EventController<Vbox> {
         makeIngredientButton(name);
     }
 
-    public void removeIngredientJfx(ActionEvent e){
-        String ingredientToRemove = ingredientsRemoveField.getText();
-        beverages.removeIngredient(ingredientToRemove);
-        ingredientsTextArea.setText(beverages.listIngredients());
-    }
 
     public void saveIngredientsJfx(ActionEvent e) {
         String filename = "ingredients.dat";
@@ -274,9 +250,7 @@ public class EventController<Vbox> {
         }
     }
 
-    public void sortIngredientsJfx(ActionEvent e){
-        ingredientsTextArea.setText(beverages.sortIngredientsAlphabetically());
-    }
+
 
     /**
      * RECIPIES METHODS

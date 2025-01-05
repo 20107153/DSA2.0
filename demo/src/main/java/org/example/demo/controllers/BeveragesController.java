@@ -30,10 +30,6 @@ public class BeveragesController {
         System.out.println("Beverages remove"+ drinkName);
     }
 
-    public String listDrinks(){
-        return drinksHashMap.toString();
-    }
-
     public String searchDrinksByName(String searchTerm){
         Entry<String,Drink> listHead = drinksHashMap.searchByName(searchTerm);
         Entry<String,Drink> current = listHead;
@@ -46,17 +42,6 @@ public class BeveragesController {
         return resultString;
     }
 
-    public String sortDrinksAlphabetically(){
-        Entry<String,Drink> listHead = drinksHashMap.sort();
-        Entry<String,Drink> current = listHead;
-        String resultString = "";
-        while (current.getNext()!=null){
-            resultString+= current.thisString() + "\n";
-            current=current.getNext();
-        }
-        resultString += current.thisString();
-        return resultString;
-    }
 
     public Entry<String, Drink> returnListSortedDrinks(){
         Entry<String,Drink> listHead = drinksHashMap.sort();
@@ -104,9 +89,6 @@ public class BeveragesController {
         }
     }
 
-    public String listIngredients(){
-        return ingredientsHashMap.toString();
-    }
 
     public void saveIngredient(MyHashMap<String, Ingredient> ingredientsHashMap, String filename){
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))){
@@ -131,19 +113,6 @@ public class BeveragesController {
 
     public String searchIngredientssByName(String searchTerm){
         Entry<String,Ingredient> listHead = ingredientsHashMap.searchByName(searchTerm);
-        Entry<String,Ingredient> current = listHead;
-        String resultString = "";
-        while (current.getNext()!=null){
-            resultString+= current.thisString() + "\n";
-            current=current.getNext();
-        }
-        resultString += current.thisString();
-        return resultString;
-    }
-
-
-    public String sortIngredientsAlphabetically(){
-        Entry<String,Ingredient> listHead = ingredientsHashMap.sort();
         Entry<String,Ingredient> current = listHead;
         String resultString = "";
         while (current.getNext()!=null){
