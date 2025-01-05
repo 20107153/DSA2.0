@@ -419,6 +419,40 @@ public class EventController<Vbox> {
         });
         resultsVBox.getChildren().add(drinkButton);
     }
+    private void makeIngredientResultButton(String name) {
+        Button ingredientButton = new Button(name);
+        ingredientButton.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
+
+        ingredientButton.setOnAction(event -> {
+            Ingredient ingredient = beverages.getIngredient(name);
+            if (ingredient != null) {
+                Dialog<ButtonType> dialog = new Dialog<>();
+                dialog.setTitle("Ingredient Information");
+                dialog.setHeaderText(ingredient.getName());
+
+                VBox vbox = new VBox();
+                vbox.setPrefWidth(300);
+                vbox.getChildren().add(new javafx.scene.control.Label("Description: " + ingredient.getTextualDescription()));
+                vbox.getChildren().add(new javafx.scene.control.Label("ABV: " + ingredient.getABV()));
+
+                Button deleteButton = new Button("Delete");
+                deleteButton.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
+                deleteButton.setOnAction(deleteEvent -> {
+                    beverages.removeIngredient(name);
+                    ingredientButtonsHashMap.remove(name);
+                    ingredientsFlowPane.getChildren().remove(ingredientButton);
+                    dialog.close();
+                });
+
+                vbox.getChildren().add(deleteButton);
+
+                dialog.getDialogPane().setContent(vbox);
+                dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+                dialog.showAndWait();
+            }
+        });
+        resultsVBox.getChildren().add(ingredientButton);
+    }
 
     public void searchDrinksJfx(ActionEvent e){
         resultsVBox.getChildren().clear();
@@ -437,7 +471,18 @@ public class EventController<Vbox> {
     }
 
     public void searchIngredientsJfx(ActionEvent e){
+        resultsVBox.getChildren().clear();
         String searchTerm = searchTextField.getText();
-        resultsTextArea.setText(beverages.searchIngredientssByName(searchTerm));
+
+        Entry<String, Ingredient> listHead = beverages.searchIngredientssByName(searchTerm);
+        Entry<String, Ingredient> currentEntry = listHead;
+
+        while (currentEntry.getNext() != null) {
+            String name = currentEntry.getKey();
+            makeDrinkResultButton(name);
+            currentEntry = currentEntry.getNext();
+        }
+        String name = currentEntry.getKey();
+        makeIngredientButton(name);
     }
 }

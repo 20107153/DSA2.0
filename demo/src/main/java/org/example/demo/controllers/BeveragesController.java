@@ -104,16 +104,9 @@ public class BeveragesController {
         return null;
     }
 
-    public String searchIngredientssByName(String searchTerm){
+    public Entry<String,Ingredient> searchIngredientssByName(String searchTerm){
         Entry<String,Ingredient> listHead = ingredientsHashMap.searchByName(searchTerm);
-        Entry<String,Ingredient> current = listHead;
-        String resultString = "";
-        while (current.getNext()!=null){
-            resultString+= current.thisString() + "\n";
-            current=current.getNext();
-        }
-        resultString += current.thisString();
-        return resultString;
+        return listHead;
     }
 
     public Entry<String,Ingredient> getIngredientMap(String searchTerm){
