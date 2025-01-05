@@ -143,6 +143,7 @@ public class EventController<Vbox> {
         System.out.println(beverages.loadDrink(filename));
 
         if (loadHashDrinks != null) {
+            drinksFlowPane.getChildren().clear();
             MyHashMap<String, Button> emptyHashMap = new MyHashMap<>();
             drinkButtonsHashMap = emptyHashMap;
             Entry<String, Drink> listHead = beverages.returnListSortedDrinks();
@@ -250,6 +251,7 @@ public class EventController<Vbox> {
         System.out.println(beverages.loadIngredient(filename));
 
         if (listIngredients != null) {
+            ingredientsFlowPane.getChildren().clear();
             MyHashMap<String, Button> emptyHashMap = new MyHashMap<>();
             ingredientButtonsHashMap = emptyHashMap;
             // Update the UI or internal state with the loaded drinks
