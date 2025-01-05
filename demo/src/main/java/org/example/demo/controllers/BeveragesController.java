@@ -198,4 +198,7 @@ public class BeveragesController {
         return null;
     }
 
+    public Drink getDrink(String name){
+        return drinksHashMap.get(name);
+    }
 }

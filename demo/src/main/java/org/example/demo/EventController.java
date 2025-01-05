@@ -3,10 +3,13 @@ package org.example.demo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.FlowPane;
 import org.example.demo.controllers.BeveragesController;
 import org.example.demo.models.*;
 import org.example.demo.controllers.MyHashMap;
 import org.example.demo.models.Ingredient;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -35,7 +38,22 @@ public class EventController {
     private TextArea recipeTextArea;
     @FXML
     private TextField removeRecipeField;
+    @FXML
+    private FlowPane drinksFlowPane;
+    private MyHashMap<String, Button> drinkButtonsHashMap = new MyHashMap<>();
 
+
+    private void sortButtons(MyHashMap<String, Button> hashMap){
+        Entry<String, Button> sortedHead = hashMap.sort();
+
+        drinksFlowPane.getChildren().clear();
+
+        Entry<String, Button> current = sortedHead;
+        while (current != null){
+            drinksFlowPane.getChildren().add(current.getValue());
+            current = current.getNext();
+        }
+    }
 
 
     /**
@@ -50,15 +68,47 @@ public class EventController {
         String origin = drinkOriginField.getText();
         String description = drinkDescriptionField.getText();
         String image = drinkImageField.getText();
+
         beverages.addDrink(name,origin,description,image);
-        drinksTextArea.setText(beverages.listDrinks());
+
+        Button drinkButton = new Button(name);
+        drinkButton.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
+
+        drinkButton.setOnAction(event -> {
+            Drink drink = beverages.getDrink(name);
+            if (drink != null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Drink Information");
+                alert.setHeaderText(drink.getName());
+                alert.setContentText(
+                        "Origin: " + drink.getPlaceOfOrigin() + "\n" +
+                                "Description: " + drink.getTextualDescription() + "\n" +
+                                "Image: " + drink.getImage()
+                );
+                alert.showAndWait();
+            }
+        });
+        drinkButtonsHashMap.put(name, drinkButton);
+        sortButtons(drinkButtonsHashMap);
+        drinksFlowPane.getChildren().add(drinkButton);
     }
 
     public void removeDrinkJfx(ActionEvent e){
         String drinkToRemove = drinkRemoveField.getText();
         beverages.removeDrink(drinkToRemove);
-        drinksTextArea.setText(beverages.listDrinks());
+
+        Button buttonToRemove = drinkButtonsHashMap.get(drinkToRemove);
+        if (buttonToRemove != null){
+            drinksFlowPane.getChildren().remove(buttonToRemove);
+            drinkButtonsHashMap.remove(drinkToRemove);
+        }
+        sortButtons(drinkButtonsHashMap);
     }
+
+    public void sortDrinksJfx(ActionEvent e){
+        drinksTextArea.setText(beverages.sortDrinksAlphabetically());
+    }
+
 
     public void saveDrinksJfx(ActionEvent e) {
         String filename = "drinks.dat";
@@ -91,9 +141,8 @@ public class EventController {
         drinksTextArea.setText(beverages.listDrinks());
     }
 
-    public void sortDrinksJfx(ActionEvent e){
-        drinksTextArea.setText(beverages.sortDrinksAlphabetically());
-    }
+
+
 
     /**
      * INGREDIENTS METHODS
