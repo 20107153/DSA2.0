@@ -50,6 +50,22 @@ public class EventController<Vbox> {
     private MyHashMap<String, Button> drinkButtonsHashMap = new MyHashMap<>();
     private MyHashMap<String, Button> ingredientButtonsHashMap = new MyHashMap<>();
 
+    private void sortButtons(MyHashMap<String, Button> hashMap){
+        Entry<String, Button> sortedHead = hashMap.sort();
+
+        drinksFlowPane.getChildren().clear();
+
+        Entry<String, Button> current = sortedHead;
+        while (current != null){
+            drinksFlowPane.getChildren().add(current.getValue());
+            current = current.getNext();
+        }
+    }
+
+
+    /**
+     *DRINKS METHODS
+     */
 
     private void makeDrinkButton(String name) {
         Button drinkButton = new Button(name);
@@ -88,23 +104,6 @@ public class EventController<Vbox> {
         sortButtons(drinkButtonsHashMap);
         drinksFlowPane.getChildren().add(drinkButton);
     }
-
-    private void sortButtons(MyHashMap<String, Button> hashMap){
-        Entry<String, Button> sortedHead = hashMap.sort();
-
-        drinksFlowPane.getChildren().clear();
-
-        Entry<String, Button> current = sortedHead;
-        while (current != null){
-            drinksFlowPane.getChildren().add(current.getValue());
-            current = current.getNext();
-        }
-    }
-
-
-    /**
-     *DRINKS METHODS
-     */
     public void listDrinksJfx(ActionEvent e){
         drinksTextArea.setText(beverages.listDrinks());
     }
@@ -180,18 +179,7 @@ public class EventController<Vbox> {
     /**
      * INGREDIENTS METHODS
      */
-
-    public void listIngredientsJfx(ActionEvent e){
-        ingredientsTextArea.setText(beverages.listIngredients());
-    }
-
-    public void addIngredientJfx(ActionEvent e){
-        String name = ingredientsNameField.getText();
-        String description = ingredientsDescriptionField.getText();
-        Double ABV = Double.valueOf(ingredientsAbvField.getText());
-
-        beverages.addIngredient(name,description,ABV);
-
+    private void makeIngredientButton(String name) {
         Button ingredientButton = new Button(name);
         ingredientButton.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
 
@@ -226,6 +214,19 @@ public class EventController<Vbox> {
         ingredientButtonsHashMap.put(name, ingredientButton);
         sortButtons(ingredientButtonsHashMap);
         ingredientsFlowPane.getChildren().add(ingredientButton);
+    }
+
+    public void listIngredientsJfx(ActionEvent e){
+        ingredientsTextArea.setText(beverages.listIngredients());
+    }
+
+    public void addIngredientJfx(ActionEvent e){
+        String name = ingredientsNameField.getText();
+        String description = ingredientsDescriptionField.getText();
+        Double ABV = Double.valueOf(ingredientsAbvField.getText());
+
+        beverages.addIngredient(name,description,ABV);
+        makeIngredientButton(name);
     }
 
     public void removeIngredientJfx(ActionEvent e){
@@ -388,6 +389,4 @@ public class EventController<Vbox> {
         String searchTerm = searchTextField.getText();
         resultsTextArea.setText(beverages.searchIngredientssByName(searchTerm));
     }
-
-
 }
