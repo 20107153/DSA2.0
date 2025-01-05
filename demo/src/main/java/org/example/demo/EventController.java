@@ -152,12 +152,13 @@ public class EventController<Vbox> {
         String filename = "drinks.dat"; // Hardcoded filename
 
         // Attempt to load the drinks from the file
-        MyHashMap<String, Drink> listDrinks = beverages.loadDrink(filename);
+        MyHashMap<String, Drink> loadHashDrinks = beverages.loadDrink(filename);
         System.out.println(beverages.loadDrink(filename));
 
-        if (listDrinks != null) {
+        if (loadHashDrinks != null) {
             // Update the UI or internal state with the loaded drinks
-            drinksTextArea.setText(beverages.listDrinks());
+            //drinksTextArea.setText(beverages.listDrinks());
+            loadDrinkButtons();
 
             // Show success message
             System.out.println("Drink loaded successfully from " + filename);
@@ -165,7 +166,18 @@ public class EventController<Vbox> {
             // If loading failed, show an error message
             System.out.println("Error loading drinks from file.");
         }
-        drinksTextArea.setText(beverages.listDrinks());
+        //drinksTextArea.setText(beverages.listDrinks());
+    }
+    public void loadDrinkButtons(){
+        Entry<String, Drink> listHead = beverages.returnListSortedDrinks();
+        Entry<String, Drink> currentEntry = listHead;
+        while (currentEntry.getNext() != null) {
+            String name = currentEntry.getKey();
+            makeDrinkButton(name);
+            currentEntry = currentEntry.getNext();
+        }
+        String name = currentEntry.getKey();
+        makeDrinkButton(name);
     }
 
 
