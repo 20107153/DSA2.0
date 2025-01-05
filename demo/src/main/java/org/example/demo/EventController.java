@@ -105,7 +105,7 @@ public class EventController<Vbox> {
             }
         });
         drinkButtonsHashMap.put(name, drinkButton);
-        sortDrinkButtons(drinkButtonsHashMap);
+
         drinksFlowPane.getChildren().add(drinkButton);
     }
 
@@ -119,7 +119,9 @@ public class EventController<Vbox> {
 
         beverages.addDrink(name,origin,description,image);
 
+
         makeDrinkButton(name);
+        sortDrinkButtons(drinkButtonsHashMap);
     }
 
 
@@ -146,6 +148,7 @@ public class EventController<Vbox> {
             MyHashMap<String, Button> emptyHashMap = new MyHashMap<>();
             drinkButtonsHashMap = emptyHashMap;
             Entry<String, Drink> listHead = beverages.returnListSortedDrinks();
+            System.out.println(listHead);
             Entry<String, Drink> currentEntry = listHead;
             while (currentEntry != null) {
                 System.out.println("key" +currentEntry.getKey());
@@ -215,7 +218,7 @@ public class EventController<Vbox> {
             }
         });
         ingredientButtonsHashMap.put(name, ingredientButton);
-        sortIngredientButtons(ingredientButtonsHashMap);
+
         ingredientsFlowPane.getChildren().add(ingredientButton);
     }
 
@@ -228,6 +231,7 @@ public class EventController<Vbox> {
 
         beverages.addIngredient(name,description,ABV);
         makeIngredientButton(name);
+        sortIngredientButtons(ingredientButtonsHashMap);
     }
 
 
