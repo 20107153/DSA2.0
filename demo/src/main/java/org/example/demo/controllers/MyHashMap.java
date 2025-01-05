@@ -32,7 +32,7 @@ public class MyHashMap<K,V> implements Serializable {
                 hash += sKey.charAt(i);
             }
             //multiply value of all characters by the last character - the length^2 to get a more unique hash
-            hash *= (sKey.charAt(sKey.length()-1) - (sKey.length() * sKey.length()));
+            hash *= (sKey.charAt(sKey.length()-1) * (sKey.length() * sKey.length()));
         } else if (kKey instanceof Integer){
             int iKey = (Integer) kKey;
             hash += iKey;

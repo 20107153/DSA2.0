@@ -456,7 +456,7 @@ public class EventController<Vbox> {
 
         while (currentEntry.getNext() != null) {
             String name = currentEntry.getKey();
-            makeIngredientButton(name);
+            makeIngredientResultButton(name);
             currentEntry = currentEntry.getNext();
         }
         String name = currentEntry.getKey();
