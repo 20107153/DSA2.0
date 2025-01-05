@@ -89,7 +89,7 @@
                   <TextField fx:id="searchTextField" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="300.0" promptText="Enter Search Term" />
                   <Button layoutX="324.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchDrinksJfx" text="Search Drinks" />
                   <Button layoutX="417.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchIngredientsJfx" text="Search Ingredients" />
-                  <VBox layoutX="14.0" layoutY="40.0" prefHeight="433.0" prefWidth="786.0" />
+                  <VBox fx:id="resultsVBox" layoutX="14.0" layoutY="40.0" prefHeight="433.0" prefWidth="786.0" />
                </children>
             </AnchorPane>
         </content>

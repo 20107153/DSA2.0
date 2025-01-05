@@ -52,8 +52,15 @@ public class EventController<Vbox> {
     private MyHashMap<String, Button> drinkButtonsHashMap = new MyHashMap<>();
     private MyHashMap<String, Button> ingredientButtonsHashMap = new MyHashMap<>();
 
-    private void sortButtons(MyHashMap<String, Button> hashMap){
-        Entry<String, Button> sortedHead = hashMap.sort();
+
+
+
+    /**
+     *DRINKS METHODS
+     */
+
+    private void sortDrinkButtons(MyHashMap<String, Button> myHashMap){
+        Entry<String, Button> sortedHead = myHashMap.sort();
 
         drinksFlowPane.getChildren().clear();
 
@@ -63,11 +70,6 @@ public class EventController<Vbox> {
             current = current.getNext();
         }
     }
-
-
-    /**
-     *DRINKS METHODS
-     */
 
     private void makeDrinkButton(String name) {
         Button drinkButton = new Button(name);
@@ -103,7 +105,7 @@ public class EventController<Vbox> {
             }
         });
         drinkButtonsHashMap.put(name, drinkButton);
-        sortButtons(drinkButtonsHashMap);
+        sortDrinkButtons(drinkButtonsHashMap);
         drinksFlowPane.getChildren().add(drinkButton);
     }
 
@@ -141,6 +143,8 @@ public class EventController<Vbox> {
         System.out.println(beverages.loadDrink(filename));
 
         if (loadHashDrinks != null) {
+            MyHashMap<String, Button> emptyHashMap = new MyHashMap<>();
+            drinkButtonsHashMap = emptyHashMap;
             Entry<String, Drink> listHead = beverages.returnListSortedDrinks();
             Entry<String, Drink> currentEntry = listHead;
             while (currentEntry.getNext() != null) {
@@ -165,6 +169,18 @@ public class EventController<Vbox> {
     /**
      * INGREDIENTS METHODS
      */
+
+    private void sortIngredientButtons(MyHashMap<String, Button> myHashMap){
+        Entry<String, Button> sortedHead = myHashMap.sort();
+
+        ingredientsFlowPane.getChildren().clear();
+
+        Entry<String, Button> current = sortedHead;
+        while (current != null){
+            ingredientsFlowPane.getChildren().add(current.getValue());
+            current = current.getNext();
+        }
+    }
     private void makeIngredientButton(String name) {
         Button ingredientButton = new Button(name);
         ingredientButton.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
@@ -198,7 +214,7 @@ public class EventController<Vbox> {
             }
         });
         ingredientButtonsHashMap.put(name, ingredientButton);
-        sortButtons(ingredientButtonsHashMap);
+        sortIngredientButtons(ingredientButtonsHashMap);
         ingredientsFlowPane.getChildren().add(ingredientButton);
     }
 
@@ -233,6 +249,8 @@ public class EventController<Vbox> {
         System.out.println(beverages.loadIngredient(filename));
 
         if (listIngredients != null) {
+            MyHashMap<String, Button> emptyHashMap = new MyHashMap<>();
+            ingredientButtonsHashMap = emptyHashMap;
             // Update the UI or internal state with the loaded drinks
             Entry<String, Ingredient> listHead = beverages.returnListSortedIngredients();
             Entry<String, Ingredient> currentEntry = listHead;
@@ -387,6 +405,7 @@ public class EventController<Vbox> {
                     beverages.removeDrink(name);
                     drinkButtonsHashMap.remove(name);
                     resultsVBox.getChildren().remove(drinkButton);
+                    drinksFlowPane.getChildren().remove(drinkButton);
                     dialog.close();
                 });
 
@@ -397,12 +416,11 @@ public class EventController<Vbox> {
                 dialog.showAndWait();
             }
         });
-        drinkButtonsHashMap.put(name, drinkButton);
-        sortButtons(drinkButtonsHashMap);
         resultsVBox.getChildren().add(drinkButton);
     }
 
     public void searchDrinksJfx(ActionEvent e){
+        resultsVBox.getChildren().clear();
         String searchTerm = searchTextField.getText();
 
         Entry<String, Drink> listHead = beverages.searchDrinksByName(searchTerm);
