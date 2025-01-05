@@ -63,6 +63,11 @@ public class BeveragesController {
         return listHead;
     }
 
+    public Entry<String, Ingredient> returnListSortedIngredients(){
+        Entry<String,Ingredient> listHead = ingredientsHashMap.sort();
+        return listHead;
+    }
+
     public void saveDrink(MyHashMap<String, Drink> drinksHashMap, String filename){
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))){
             oos.writeObject(drinksHashMap);
