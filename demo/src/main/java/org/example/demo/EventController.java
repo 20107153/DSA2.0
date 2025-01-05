@@ -44,37 +44,14 @@ public class EventController<Vbox> {
     private TextField removeRecipeField;
     @FXML
     private FlowPane drinksFlowPane;
+    @FXML
+    private FlowPane ingredientsFlowPane;
+
     private MyHashMap<String, Button> drinkButtonsHashMap = new MyHashMap<>();
+    private MyHashMap<String, Button> ingredientButtonsHashMap = new MyHashMap<>();
 
 
-    private void sortButtons(MyHashMap<String, Button> hashMap){
-        Entry<String, Button> sortedHead = hashMap.sort();
-
-        drinksFlowPane.getChildren().clear();
-
-        Entry<String, Button> current = sortedHead;
-        while (current != null){
-            drinksFlowPane.getChildren().add(current.getValue());
-            current = current.getNext();
-        }
-    }
-
-
-    /**
-     *DRINKS METHODS
-     */
-    public void listDrinksJfx(ActionEvent e){
-        drinksTextArea.setText(beverages.listDrinks());
-    }
-
-    public void addDrinkJfx(ActionEvent e){
-        String name = drinkNameField.getText();
-        String origin = drinkOriginField.getText();
-        String description = drinkDescriptionField.getText();
-        String image = drinkImageField.getText();
-
-        beverages.addDrink(name,origin,description,image);
-
+    private void makeDrinkButton(String name) {
         Button drinkButton = new Button(name);
         drinkButton.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
 
@@ -110,6 +87,37 @@ public class EventController<Vbox> {
         drinkButtonsHashMap.put(name, drinkButton);
         sortButtons(drinkButtonsHashMap);
         drinksFlowPane.getChildren().add(drinkButton);
+    }
+
+    private void sortButtons(MyHashMap<String, Button> hashMap){
+        Entry<String, Button> sortedHead = hashMap.sort();
+
+        drinksFlowPane.getChildren().clear();
+
+        Entry<String, Button> current = sortedHead;
+        while (current != null){
+            drinksFlowPane.getChildren().add(current.getValue());
+            current = current.getNext();
+        }
+    }
+
+
+    /**
+     *DRINKS METHODS
+     */
+    public void listDrinksJfx(ActionEvent e){
+        drinksTextArea.setText(beverages.listDrinks());
+    }
+
+    public void addDrinkJfx(ActionEvent e){
+        String name = drinkNameField.getText();
+        String origin = drinkOriginField.getText();
+        String description = drinkDescriptionField.getText();
+        String image = drinkImageField.getText();
+
+        beverages.addDrink(name,origin,description,image);
+
+        makeDrinkButton(name);
     }
 
     public void removeDrinkJfx(ActionEvent e){
@@ -172,18 +180,46 @@ public class EventController<Vbox> {
     }
 
     public void addIngredientJfx(ActionEvent e){
-        try {
-            String name = ingredientsNameField.getText();
-            String description = ingredientsDescriptionField.getText();
-            String abvText = ingredientsAbvField.getText();
-            Double abv= Double.parseDouble(abvText);
-            beverages.addIngredient(name,description,abv);
-            ingredientsTextArea.setText(beverages.listIngredients());
-        } catch (NumberFormatException err){
-            System.out.println("Invalid abv entered, must be double");
-        } catch (IndexOutOfBoundsException err){
-            System.out.println("Invalid abv entered, must be double");
-        }
+        String name = ingredientsNameField.getText();
+        String description = ingredientsDescriptionField.getText();
+        Double ABV = Double.valueOf(ingredientsAbvField.getText());
+
+        beverages.addIngredient(name,description,ABV);
+
+        Button ingredientButton = new Button(name);
+        ingredientButton.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
+
+        ingredientButton.setOnAction(event -> {
+            Ingredient ingredient = beverages.getIngredient(name);
+            if (ingredient != null) {
+                Dialog<ButtonType> dialog = new Dialog<>();
+                dialog.setTitle("Ingredient Information");
+                dialog.setHeaderText(ingredient.getName());
+
+                VBox vbox = new VBox();
+                vbox.setPrefWidth(300);
+                vbox.getChildren().add(new javafx.scene.control.Label("Description: " + ingredient.getTextualDescription()));
+                vbox.getChildren().add(new javafx.scene.control.Label("ABV: " + ingredient.getABV()));
+
+                Button deleteButton = new Button("Delete");
+                deleteButton.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
+                deleteButton.setOnAction(deleteEvent -> {
+                    beverages.removeIngredient(name);
+                    ingredientButtonsHashMap.remove(name);
+                    ingredientsFlowPane.getChildren().remove(ingredientButton);
+                    dialog.close();
+                });
+
+                vbox.getChildren().add(deleteButton);
+
+                dialog.getDialogPane().setContent(vbox);
+                dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+                dialog.showAndWait();
+            }
+        });
+        ingredientButtonsHashMap.put(name, ingredientButton);
+        sortButtons(ingredientButtonsHashMap);
+        ingredientsFlowPane.getChildren().add(ingredientButton);
     }
 
     public void removeIngredientJfx(ActionEvent e){
@@ -234,7 +270,7 @@ public class EventController<Vbox> {
 
     public void addToRecipeList(ActionEvent e){
         if (beverages.getIngredient(addIngredientToRecipe.getText())!=null){
-            Entry<String,Ingredient> newItem = beverages.getIngredient(addIngredientToRecipe.getText());
+            Entry<String,Ingredient> newItem = beverages.getIngredientMap(addIngredientToRecipe.getText());
             newItem.setNext(null);
 
             Entry<String, Ingredient> checkSimilarEntry = recipeListHead;

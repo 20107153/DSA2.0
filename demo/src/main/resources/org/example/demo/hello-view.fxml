@@ -103,6 +103,10 @@
                   </TabPane>
                   <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#listIngredientsJfx" text="Refresh" />
                   <Button layoutX="74.0" layoutY="14.0" mnemonicParsing="false" onAction="#sortIngredientsJfx" text="Sort" />
+                  <FlowPane layoutY="39.0" prefHeight="420.0" prefWidth="398.0">
+                     <children>
+                        <FlowPane fx:id="ingredientsFlowPane" prefHeight="382.0" prefWidth="344.0" />
+                     </children></FlowPane>
                </children>
             </AnchorPane>
          </content>

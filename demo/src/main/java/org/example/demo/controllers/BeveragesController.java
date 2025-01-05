@@ -144,7 +144,7 @@ public class BeveragesController {
         return resultString;
     }
 
-    public Entry<String,Ingredient> getIngredient(String searchTerm){
+    public Entry<String,Ingredient> getIngredientMap(String searchTerm){
         return ingredientsHashMap.getEntry(searchTerm);
     }
 
@@ -200,5 +200,8 @@ public class BeveragesController {
 
     public Drink getDrink(String name){
         return drinksHashMap.get(name);
+    }
+    public Ingredient getIngredient(String name){
+        return ingredientsHashMap.get(name);
     }
 }
