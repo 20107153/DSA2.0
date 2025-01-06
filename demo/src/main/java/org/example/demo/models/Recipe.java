@@ -15,10 +15,6 @@ public class Recipe implements Serializable {
         this.headIngredient = headIngredient;
     }
 
-    public Entry<String, Ingredient> getHeadIngredient() {
-        return headIngredient;
-    }
-
     public String getName() {
         return name;
     }

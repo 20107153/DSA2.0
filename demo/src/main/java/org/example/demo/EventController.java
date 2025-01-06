@@ -123,12 +123,14 @@ public class EventController<Vbox> {
     }
 
     public void loadDrinksJfx(ActionEvent e) {
-        String filename = "drinks.dat"; // Hardcoded filename
+        String filename = "drinks.dat";
 
-        // Attempt to load the drinks from the file
+        // load drinks from "drinks.dat" file to console.
         MyHashMap<String, Drink> loadHashDrinks = beverages.loadDrink(filename);
         System.out.println(beverages.loadDrink(filename));
 
+        // wipes the currently existing drinkButtonsHashMap
+        // and then loads a set of drinks from the file using a while loop
         if (loadHashDrinks != null) {
             drinksFlowPane.getChildren().clear();
             MyHashMap<String, Button> emptyHashMap = new MyHashMap<>();
@@ -144,10 +146,8 @@ public class EventController<Vbox> {
             String name = currentEntry.getKey();
             makeDrinkButton(name);
 
-            // Show success message
             System.out.println("Drink loaded successfully from " + filename);
         } else {
-            // If loading failed, show an error message
             System.out.println("Error loading drinks from file.");
         }
     }
@@ -231,17 +231,18 @@ public class EventController<Vbox> {
     }
 
     public void loadIngredientsJfx(ActionEvent e) {
-        String filename = "ingredients.dat"; // Hardcoded filename
+        String filename = "ingredients.dat";
 
-        // Attempt to load the ingredients from the file
+        // load drinks from "ingredients.dat" file to console.
         MyHashMap<String, Ingredient> listIngredients = beverages.loadIngredient(filename);
         System.out.println(beverages.loadIngredient(filename));
 
+        // wipes the currently existing drinkButtonsHashMap
+        // and then loads a set of drinks from the file using a while loop
         if (listIngredients != null) {
             ingredientsFlowPane.getChildren().clear();
             MyHashMap<String, Button> emptyHashMap = new MyHashMap<>();
             ingredientButtonsHashMap = emptyHashMap;
-            // Update the UI or internal state with the loaded drinks
             Entry<String, Ingredient> listHead = beverages.returnListSortedIngredients();
             Entry<String, Ingredient> currentEntry = listHead;
             while (currentEntry.getNext() != null) {
@@ -252,10 +253,8 @@ public class EventController<Vbox> {
             String name = currentEntry.getKey();
             makeIngredientButton(name);
 
-            // Show success message
             System.out.println("Ingredient loaded successfully from " + filename);
         } else {
-            // If loading failed, show an error message
             System.out.println("Error loading ingredients from file.");
         }
     }
@@ -349,15 +348,14 @@ public class EventController<Vbox> {
     public void loadRecipesJfx(ActionEvent e) {
         String filename = "recipes.dat"; // Hardcoded filename
 
-        // Attempt to load the drinks from the file
+        // load drinks from "recipes.dat" file to console.
         MyHashMap<String, Recipe> listRecipes = beverages.loadRecipe(filename);
         System.out.println(beverages.loadRecipe(filename));
 
         if (listRecipes != null) {
-            // Update the UI or internal state with the loaded drinks
+            // Update the text area with the new recipes
             recipeTextArea.setText(beverages.listRecipes());
 
-            // Show success message
             System.out.println("Recipe loaded successfully from " + filename);
         } else {
             // If loading failed, show an error message
