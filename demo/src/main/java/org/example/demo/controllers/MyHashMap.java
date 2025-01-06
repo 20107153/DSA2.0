@@ -29,7 +29,7 @@ public class MyHashMap<K,V> implements Serializable {
             for (int i=0;i<sKey.length();i++){
                 hash += sKey.charAt(i);
             }
-            //multiply value of all characters by the last character - the length^2 to get a more unique hash
+            //multiply value of all characters by the last character * the length^2 to get a more unique hash
             hash *= (sKey.charAt(sKey.length()-1) * (sKey.length() * sKey.length()));
         } else if (kKey instanceof Integer){
             int iKey = (Integer) kKey;
@@ -173,7 +173,7 @@ public Entry<K,V> getEntry(K key){
     }
 
     public Entry<K, V> sortLinkedList(Entry<K, V> head) {
-        //Checks if the list is empty, there would be no need to sort
+        //Check if the list is empty, there would be no need to sort
         if (head == null || head.getNext() == null) {
             return head;
         }
@@ -181,7 +181,7 @@ public Entry<K,V> getEntry(K key){
         Entry<K, V> sortedHead = head;
 
         for (Entry<K, V> current = sortedHead; current != null; current = current.getNext()) {
-            // Finds the minimum node (minNode), and checks vs the next node (compare)
+            // Finds the minimum and checks vs the next
             Entry<K, V> minNode = current;
             for (Entry<K, V> compare = current.getNext(); compare != null; compare = compare.getNext()) {
                 //if compare is less than minimum, they swap places.
@@ -212,7 +212,7 @@ public Entry<K,V> getEntry(K key){
         Entry<K, V> resultHead = null; // Head entry in linked list
         Entry<K, V> currentResult = null; // Current entry in linked list
 
-        // Iterate through all buckets
+        // Iterate through array
         for (int i = 0; i < SIZE; i++) {
             Entry<K, V> currentEntry = table[i];
 
@@ -262,7 +262,7 @@ public Entry<K,V> getEntry(K key){
         for (int i = 0; i < SIZE; i++) {
             Entry<K, V> currentEntry = table[i];
             while (currentEntry != null) {
-                // Creates any particular entry in the array based on its index, and then iterates the linked list.
+                // Creates an entry in the array based on its index, and then iterates the linked list.
                 entriesArray[index++] = new Entry<>(currentEntry.getKey(), currentEntry.getValue());
                 currentEntry = currentEntry.getNext();
             }
@@ -278,7 +278,7 @@ public Entry<K,V> getEntry(K key){
                 String minIndexStr = (String)entriesArray[minIndex].getKey();
                 String comparisonStr = (String)entriesArray[j].getKey();
 
-                //compares if value to compare(j) is less than the minimum index, if it is. then update minimum index to j
+                //compares if value to compare is less than the minimum index, if it is. then update minimum index to j
                 if (comparisonStr.compareTo(minIndexStr) < 0){
                     minIndex = j;
                 }
