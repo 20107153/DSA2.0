@@ -18,25 +18,14 @@ public class Ingredient implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getTextualDescription() {
         return textualDescription;
-    }
-
-    public void setTextualDescription(String textualDescription) {
-        this.textualDescription = textualDescription;
     }
 
     public Double getABV() {
         return ABV;
     }
 
-    public void setABV(Double ABV) {
-        this.ABV = ABV;
-    }
 
     @Override
     public String toString() {

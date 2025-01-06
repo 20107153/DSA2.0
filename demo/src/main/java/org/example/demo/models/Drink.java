@@ -20,32 +20,16 @@ public class Drink implements Serializable {
         return image;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public String getTextualDescription() {
         return textualDescription;
-    }
-
-    public void setTextualDescription(String textualDescription) {
-        this.textualDescription = textualDescription;
     }
 
     public String getPlaceOfOrigin() {
         return placeOfOrigin;
     }
 
-    public void setPlaceOfOrigin(String placeOfOrigin) {
-        this.placeOfOrigin = placeOfOrigin;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
